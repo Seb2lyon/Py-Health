@@ -44,7 +44,9 @@ class mainWindow(Frame):
 		self.welcome = welcomeWindow(self)
 
 	def goToUrl(self, url):
-			webbrowser.open_new(url)
+		""" Fonction that permit to open a web browser
+		in order to open my web site home page """
+		webbrowser.open_new(url)
 
 	def changeMainToCreateAccountOne(self):
 		""" Function that permit to jump from

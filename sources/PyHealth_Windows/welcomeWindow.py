@@ -32,7 +32,7 @@ class welcomeWindow:
 		self.labelPass['bg'] = "#E4E4E4"
 		self.labelPass['fg'] = "#000000"
 
-		self.entryPass = Entry(self.mainPage.application, textvariable=self.varPass, width=55, font=self.mainPage.normalInputFont)
+		self.entryPass = Entry(self.mainPage.application, textvariable=self.varPass, width=55, font=self.mainPage.normalInputFont, show="*")
 
 		self.buttonConnect = Button(self.mainPage.application, text="Connexion", font=self.mainPage.normalFont)
 		self.buttonConnect['bg'] = "#969696"
