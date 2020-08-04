@@ -34,11 +34,11 @@ class welcomeWindow:
 
 		self.entryPass = Entry(self.mainPage.application, textvariable=self.varPass, width=55, font=self.mainPage.normalInputFont, show="*")
 
-		self.buttonConnect = Button(self.mainPage.application, text="Connexion", font=self.mainPage.normalFont)
+		self.buttonConnect = Button(self.mainPage.application, text="Connexion", font=self.mainPage.normalFont, width=10)
 		self.buttonConnect['bg'] = "#969696"
 		self.buttonConnect['fg'] = "#FFFFFF"
 
-		# self.warningConnexion = Label(self.mainPage.application, text="Identifiant et/ou mot de passe incorrect", font=self.largeFont)
+		# self.warningConnexion = Label(self.mainPage.application, text="Identifiant et/ou mot de passe incorrect", font=self.mainPage.largeFont)
 		# self.warningConnexion['bg'] = "#E4E4E4"
 		# self.warningConnexion['fg'] = "#FF0000"
 
@@ -57,7 +57,7 @@ class welcomeWindow:
 		self.entryID.place(x=27, y=231)
 		self.labelPass.place(x=25, y=267)
 		self.entryPass.place(x=27, y=295)
-		self.buttonConnect.place(x=192, y=330)
+		self.buttonConnect.place(x=190, y=330)
 		# self.warningConnexion.place(x=71, y=375)
 		self.labelNoAccount.place(x=30, y=416)
 		self.labelCreateAccount.place(x=295, y=416)
