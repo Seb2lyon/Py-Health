@@ -1,4 +1,5 @@
 import webbrowser
+from PyHealth_User.userClass import *
 from PyHealth_Windows.welcomeWindow import *
 from PyHealth_Windows.createAccountWindowOne import *
 from PyHealth_Windows.createAccountWindowTwo import *
@@ -26,6 +27,8 @@ class mainWindow(Frame):
 		self.normalInputFont = Font(family="Arial", size=11)
 		self.largeFont = Font(family="Arial Black", size=12)
 
+		self.currentUser = userClass()
+
 		self.imgBanner = PhotoImage(file="images/Titre.gif")
 		self.banner = Label(self.application, height=106, image=self.imgBanner)
 
@@ -52,8 +55,29 @@ class mainWindow(Frame):
 	def changeMainToCreateAccountOne(self):
 		""" Function that permit to jump from
 		Main page
-		et
+		to
 		Creating account (page 1/2)""" 		
+		self.delWelcomeWindow()
+		self.createAccountOne = createAccountWindowOne(self)
+
+	def changeCreateAccountOneToCreateAccountTwo(self):
+		""" Function that permit to jump from
+		Creating account (page 1/2)
+		to
+		Creating account (page 2/2)""" 		
+		self.delCreateAccountWindowOne()
+		self.createAccountTwo = createAccountWindowTwo(self)
+
+	def changeCreateAccountTwoToCreateAccountOne(self):
+		""" Function that permit to jump from
+		Creating account (page 2/2)
+		to
+		Creating account (page 1/2)""" 		
+		self.delCreateAccountWindowTwo()
+		self.createAccountOne = createAccountWindowOne(self)
+
+	def delWelcomeWindow(self):
+		""" Destroy Welcome window """
 		self.welcome.subTitle.destroy()
 		self.welcome.labelConnect.destroy()
 		self.welcome.labelID.destroy()
@@ -66,13 +90,8 @@ class mainWindow(Frame):
 		self.welcome.labelCreateAccount.destroy()
 		del self.welcome
 
-		self.createAccountOne = createAccountWindowOne(self)
-
-	def changeCreateAccountOneToCreateAccountTwo(self):
-		""" Function that permit to jump from
-		Creating account (page 1/2)
-		et
-		Creating account (page 2/2)""" 		
+	def delCreateAccountWindowOne(self):
+		""" Destroy Create account window (part 1/2) """
 		self.createAccountOne.labelFirstName.destroy()
 		self.createAccountOne.entryFirstName.destroy()
 		self.createAccountOne.labelGender.destroy()
@@ -87,7 +106,16 @@ class mainWindow(Frame):
 		self.createAccountOne.labelSlash2.destroy()
 		self.createAccountOne.labelWarningConnexion.destroy()
 		self.createAccountOne.buttonNext.destroy()
-
 		del self.createAccountOne
 
-		self.createAccountTwo = createAccountWindowTwo(self)
+	def delCreateAccountWindowTwo(self):
+		""" Destroy Create account window (part 1/2) """
+		self.createAccountTwo.labelPseudo.destroy()
+		self.createAccountTwo.entryPseudo.destroy()
+		self.createAccountTwo.labelPasswd1.destroy()
+		self.createAccountTwo.entryPasswd1.destroy()
+		self.createAccountTwo.labelPasswd2.destroy()
+		self.createAccountTwo.entryPasswd2.destroy()
+		self.createAccountTwo.labelWarningConnexion.destroy()
+		self.createAccountTwo.buttonPrevious.destroy()
+		del self.createAccountTwo
