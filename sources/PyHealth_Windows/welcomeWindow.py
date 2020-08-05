@@ -63,3 +63,8 @@ class welcomeWindow:
 		self.labelCreateAccount.place(x=295, y=416)
 
 		self.entryID.focus()
+
+
+		# TODO : Warning if account didn't exist in the account file OR no ID input OR no passwd input
+		# TODO : Manage the credential to load the account if it exists in the accounts file
+

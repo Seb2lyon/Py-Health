@@ -64,7 +64,7 @@ class mainWindow(Frame):
 		""" Function that permit to jump from
 		Creating account (page 1/2)
 		to
-		Creating account (page 2/2)""" 		
+		Creating account (page 2/2) """ 		
 		self.delCreateAccountWindowOne()
 		self.createAccountTwo = createAccountWindowTwo(self)
 
@@ -72,9 +72,17 @@ class mainWindow(Frame):
 		""" Function that permit to jump from
 		Creating account (page 2/2)
 		to
-		Creating account (page 1/2)""" 		
+		Creating account (page 1/2) """ 		
 		self.delCreateAccountWindowTwo()
 		self.createAccountOne = createAccountWindowOne(self)
+
+	def changeCreateAccountTwoToSummary(self):
+		""" Function that permit to jump from
+		Creating account (page 2/2)
+		to
+		Summary window """ 	
+		self.delCreateAccountWindowTwo()
+		# CALL SUMMARY WINDOW
 
 	def delWelcomeWindow(self):
 		""" Destroy Welcome window """
@@ -85,7 +93,7 @@ class mainWindow(Frame):
 		self.welcome.labelPass.destroy()
 		self.welcome.entryPass.destroy()
 		self.welcome.buttonConnect.destroy()
-		# page.warningConnexion.destroy()
+		# self.welcome.warningConnexion.destroy()
 		self.welcome.labelNoAccount.destroy()
 		self.welcome.labelCreateAccount.destroy()
 		del self.welcome
@@ -109,7 +117,7 @@ class mainWindow(Frame):
 		del self.createAccountOne
 
 	def delCreateAccountWindowTwo(self):
-		""" Destroy Create account window (part 1/2) """
+		""" Destroy Create account window (part 2/2) """
 		self.createAccountTwo.labelPseudo.destroy()
 		self.createAccountTwo.entryPseudo.destroy()
 		self.createAccountTwo.labelPasswd1.destroy()
@@ -118,4 +126,8 @@ class mainWindow(Frame):
 		self.createAccountTwo.entryPasswd2.destroy()
 		self.createAccountTwo.labelWarningConnexion.destroy()
 		self.createAccountTwo.buttonPrevious.destroy()
+		self.createAccountTwo.buttonValidate.destroy()
 		del self.createAccountTwo
+
+
+		# TODO : Continue with the Summary window + destroy Warning of the Welcome page

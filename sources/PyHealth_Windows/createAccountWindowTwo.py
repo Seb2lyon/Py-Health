@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter.messagebox import *
 
 class createAccountWindowTwo:
 	""" Insert to the Main window of the application
@@ -101,5 +102,19 @@ class createAccountWindowTwo:
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=360)
 			self.entryPasswd1.focus()
-		# else:
-			# VALIDATE THE ACCOUNT AND RECORD IT
+		else:
+			self.mainPage.currentUser.userPseudo = self.varPseudo.get()
+			self.mainPage.currentUser.userPasswd = self.varPasswd1.get()
+			if self.mainPage.currentUser.userExist == True:
+				showinfo(title="Py Health - Compte mis à jour", message="Félicitations!\nVotre compte \"Py Health\" à bien été mis à jour...")
+				# UPDATE ENTRY IN THE ACCOUNTS FILE
+			else:
+				self.mainPage.currentUser.userExist = True
+				showinfo(title="Py Health - Compte créé", message="Félicitations!\nVotre compte \"Py Health\" à été créé avec succès...")
+				# CREATE NEW ENTRY IN THE ACCOUNTS FILE
+				self.mainPage.changeCreateAccountTwoToSummary()
+
+
+				# TODO : Check if Pseudo is already taken in the accounts file
+				# TODO : Update the account file (OR to update the account OR to create a new one)
+

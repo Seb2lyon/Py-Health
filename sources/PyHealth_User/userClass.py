@@ -19,3 +19,11 @@ class userClass:
 		self.userPseudo = ""
 		self.userPasswd = ""
 		# HASH THE PASSWORD
+
+		self.userHeight = ""
+		self.userWeight = ""
+		self.userBMI = ""
+		self.lastVisite = ""
+
+		#TODO : Hash the password
+		
