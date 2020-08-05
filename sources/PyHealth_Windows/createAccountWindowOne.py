@@ -15,6 +15,7 @@ class createAccountWindowOne:
 		self.mainPage = page
 
 		self.varFirstName = StringVar()
+		self.varFirstName.set("")
 
 		self.labelFirstName = Label(self.mainPage.application, text="Votre prénom :", font=self.mainPage.largeFont)
 		self.labelFirstName['bg'] = "#E4E4E4"
@@ -30,6 +31,7 @@ class createAccountWindowOne:
 		valGender = ['F', 'H']
 		self.varGender = StringVar()
 		self.varGender.set(valGender[0])
+		self.radioStock = []
 
 		j = 220
 
@@ -38,6 +40,7 @@ class createAccountWindowOne:
 			self.radioGender['bg'] = "#E4E4E4"
 			self.radioGender['fg'] = "#000000"
 			self.radioGender.place(x=140, y=j)
+			self.radioStock.append(self.radioGender)
 			j = j + 33
 
 		self.labelBirthDate = Label(self.mainPage.application, text="Votre date de naissance :", font=self.mainPage.largeFont)
@@ -140,53 +143,66 @@ class createAccountWindowOne:
 			self.entryBirthYear.config(fg = 'grey')
 
 	def validateFirstPart(self):
-		""" Validate the input Date of birth :
-		- if the date is not correct : error message and retry
-		- if the date is correct : go to the second part of the Creating account page """
+		""" Validate the inputs :
+		- if the first name is not set : error message and retry
+		- if the date of birth is not correct : error message and retry
+		- if the date of bith is correct ans first name set : go to the second part of the Creating account page """
 		self.labelWarningConnexion.destroy()
 
 		warningConnexion = False
+		controlDay = ""
+		controlMonth = ""
+		controlYear = ""
 
-		try:
-			controlDay = int(self.varBirthDay.get())
-		except:
-			warningConnexion = True
-		else:
-			if controlDay < 1 or controlDay > 31:
-				warningConnexion = True
-
-		try:
-			controlMonth = int(self.varBirthMonth.get())
-		except:
-			warningConnexion = True
-		else:
-			if controlMonth < 1 or controlMonth > 12:
-				warningConnexion = True
-
-		try:
-			controlYear = int(self.varBirthYear.get())
-		except:
-			warningConnexion = True
-		else:
-			if controlYear < 1900 or controlYear > int(time.strftime('%Y')):
-				warningConnexion = True
-
-		currentTime = time.time()
-		formatDate = str(controlDay) + "/" + str(controlMonth) + "/" + str(controlYear)
-		
-		try:
-			result = time.mktime(datetime.datetime.strptime(formatDate, "%d/%m/%Y").timetuple())
-		except ValueError:
-			warningConnexion = True
-		else:
-			if result > currentTime:
-				warningConnexion = True
-
-		if warningConnexion:
-			self.labelWarningConnexion = Label(self.mainPage.application, text="Date de naissance incorrecte", font=self.mainPage.largeFont)
+		if self.varFirstName.get() == "":
+			self.labelWarningConnexion = Label(self.mainPage.application, text="Veuillez entrer votre prénom", font=self.mainPage.largeFont)
 			self.labelWarningConnexion['bg'] = "#E4E4E4"
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=365)
-		# else:
-			# CREATE THE USER
-			# GO TO THE SECOND PAGE
+			self.entryFirstName.focus()
+		else:
+			try:
+				controlDay = int(self.varBirthDay.get())
+			except:
+				warningConnexion = True
+			else:
+				if controlDay < 1 or controlDay > 31:
+					warningConnexion = True
+
+			try:
+				controlMonth = int(self.varBirthMonth.get())
+			except:
+				warningConnexion = True
+			else:
+				if controlMonth < 1 or controlMonth > 12:
+					warningConnexion = True
+
+			try:
+				controlYear = int(self.varBirthYear.get())
+			except:
+				warningConnexion = True
+			else:
+				if controlYear < 1900 or controlYear > int(time.strftime('%Y')):
+					warningConnexion = True
+
+			currentTime = time.time()
+			formatDate = str(controlDay) + "/" + str(controlMonth) + "/" + str(controlYear)
+			
+			try:
+				result = time.mktime(datetime.datetime.strptime(formatDate, "%d/%m/%Y").timetuple())
+			except ValueError:
+				warningConnexion = True
+			else:
+				if result > currentTime:
+					warningConnexion = True
+
+			if warningConnexion:
+				self.labelWarningConnexion = Label(self.mainPage.application, text="Date de naissance incorrecte", font=self.mainPage.largeFont)
+				self.labelWarningConnexion['bg'] = "#E4E4E4"
+				self.labelWarningConnexion['fg'] = "#FF0000"
+				self.labelWarningConnexion.place(x=25, y=365)
+				self.entryBirthDay.focus()
+			else:
+				# CREATE THE USER
+				# GO TO THE SECOND PAGE
+				self.mainPage.changeCreateAccountOneToCreateAccountTwo()

@@ -1,6 +1,7 @@
 import webbrowser
 from PyHealth_Windows.welcomeWindow import *
 from PyHealth_Windows.createAccountWindowOne import *
+from PyHealth_Windows.createAccountWindowTwo import *
 
 class mainWindow(Frame):
 	""" Main window : manager of the application
@@ -66,3 +67,27 @@ class mainWindow(Frame):
 		del self.welcome
 
 		self.createAccountOne = createAccountWindowOne(self)
+
+	def changeCreateAccountOneToCreateAccountTwo(self):
+		""" Function that permit to jump from
+		Creating account (page 1/2)
+		et
+		Creating account (page 2/2)""" 		
+		self.createAccountOne.labelFirstName.destroy()
+		self.createAccountOne.entryFirstName.destroy()
+		self.createAccountOne.labelGender.destroy()
+		for i in range(2):
+			self.createAccountOne.radioStock[i].destroy()
+		self.createAccountOne.radioGender.destroy()
+		self.createAccountOne.labelBirthDate.destroy()
+		self.createAccountOne.entryBirthDay.destroy()
+		self.createAccountOne.entryBirthMonth.destroy()
+		self.createAccountOne.entryBirthYear.destroy()
+		self.createAccountOne.labelSlash1.destroy()
+		self.createAccountOne.labelSlash2.destroy()
+		self.createAccountOne.labelWarningConnexion.destroy()
+		self.createAccountOne.buttonNext.destroy()
+
+		del self.createAccountOne
+
+		self.createAccountTwo = createAccountWindowTwo(self)
