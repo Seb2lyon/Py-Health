@@ -22,8 +22,8 @@ class userClass:
 
 		self.userHeight = ""
 		self.userWeight = ""
-		self.userBMI = ""
-		self.lastVisite = ""
+		self.userBMI = [] 
+		self.lastVisits = [] 
 
 		#TODO : Hash the password
 		
