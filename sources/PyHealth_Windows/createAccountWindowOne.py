@@ -221,3 +221,6 @@ class createAccountWindowOne:
 				self.mainPage.currentUser.userMonthOfBirth = self.varBirthMonth.get()
 				self.mainPage.currentUser.userYearOfBirth = self.varBirthYear.get()
 				self.mainPage.changeCreateAccountOneToCreateAccountTwo()
+
+
+				# TODO : problem with timestamp for people born before 1970

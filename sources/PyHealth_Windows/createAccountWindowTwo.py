@@ -17,8 +17,8 @@ class createAccountWindowTwo:
 		self.varPasswd1 = StringVar()
 		self.varPasswd2 = StringVar()
 		self.varPseudo.set(self.mainPage.currentUser.userPseudo)
-		self.varPasswd1.set(self.mainPage.currentUser.userPasswd)
-		self.varPasswd2.set(self.mainPage.currentUser.userPasswd)
+		self.varPasswd1.set("")
+		self.varPasswd2.set("")
 
 		self.labelPseudo = Label(self.mainPage.application, text="Votre identifiant :", font=self.mainPage.largeFont)
 		self.labelPseudo['bg'] = "#E4E4E4"
@@ -124,15 +124,53 @@ class createAccountWindowTwo:
 			self.mainPage.currentUser.userPseudo = self.varPseudo.get()
 			self.mainPage.currentUser.userPasswd = self.varPasswd1.get()
 			if self.mainPage.currentUser.userExist == True:
+				file = open("PyHealth_User/users", "rb")
+				myUnplickler = pickle.Unpickler(file)
+				usersList = []
+				try:
+					while True:
+						usersList.append(myUnplickler.load())
+				except:
+					pass
+				file.close()
+
+				file = open("PyHealth_User/users", "wb")
+				myPickler = pickle.Pickler(file)
+				usersNumber = len(usersList)
+				i = 0
+				while i < usersNumber:
+					if usersList[i].userPseudo == self.mainPage.currentUser.userPseudo:
+						usersList[i] = self.mainPage.currentUser
+						myPickler.dump(usersList[i])
+					else:
+						myPickler.dump(usersList[i])
+					i = i + 1
+				file.close()
+
 				showinfo(title="Py Health - Compte mis à jour", message="Félicitations!\nVotre compte \"Py Health\" à bien été mis à jour...")
-				# UPDATE ENTRY IN THE ACCOUNTS FILE
+			
 			else:
 				self.mainPage.currentUser.userExist = True
+				file = open("PyHealth_User/users", "rb")
+				myUnplickler = pickle.Unpickler(file)
+				usersList = []
+				try:
+					while True:
+						usersList.append(myUnplickler.load())
+				except:
+					pass
+				file.close()
+
+				file = open("PyHealth_User/users", "wb")
+				myPickler = pickle.Pickler(file)
+				usersNumber = len(usersList)
+				i = 0
+				while i < usersNumber:
+					myPickler.dump(usersList[i])
+					i = i + 1
+				myPickler.dump(self.mainPage.currentUser)
+				file.close()
+
 				showinfo(title="Py Health - Compte créé", message="Félicitations!\nVotre compte \"Py Health\" à été créé avec succès...")
-				# CREATE NEW ENTRY IN THE ACCOUNTS FILE
-				self.mainPage.changeCreateAccountTwoToSummary()
-
-
-				# TODO : Check if Pseudo is already taken in the accounts file
-				# TODO : Update the account file (OR to update the account OR to create a new one)
-
+				
+			self.mainPage.changeCreateAccountTwoToSummary()
