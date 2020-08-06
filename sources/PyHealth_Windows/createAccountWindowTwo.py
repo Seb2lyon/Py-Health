@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter.messagebox import *
+import pickle
 
 class createAccountWindowTwo:
 	""" Insert to the Main window of the application
@@ -74,6 +75,20 @@ class createAccountWindowTwo:
 		- if the 2 password inputs are different : error message and retry
 		- if the pseudo and password are corrects : validate the account and record it """
 		self.labelWarningConnexion.destroy()
+		self.pseudoExist = False
+
+		file = open("PyHealth_User/users", "rb")
+		myUnplickler = pickle.Unpickler(file)
+
+		try:
+			while True:
+				userExtract = myUnplickler.load()
+				if userExtract.userPseudo == self.varPseudo.get():
+					self.pseudoExist = True
+		except:
+			pass
+
+		file.close()
 
 		if self.varPseudo.get() == '':
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Veuillez renseigner un identifiant", font=self.mainPage.largeFont)
@@ -81,9 +96,12 @@ class createAccountWindowTwo:
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=360)
 			self.entryPseudo.focus()
-			
-			# PSEUDO ALREADY TAKEN
-
+		if self.pseudoExist == True:
+			self.labelWarningConnexion = Label(self.mainPage.application, text="Cet identifiant est déjà pris.", font=self.mainPage.largeFont)
+			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['fg'] = "#FF0000"
+			self.labelWarningConnexion.place(x=25, y=360)
+			self.entryPseudo.focus()
 		elif self.varPasswd1.get() == '':
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Veuillez renseigner un mot de passe", font=self.mainPage.largeFont)
 			self.labelWarningConnexion['bg'] = "#E4E4E4"
