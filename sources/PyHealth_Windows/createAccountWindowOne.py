@@ -197,16 +197,40 @@ class createAccountWindowOne:
 				if controlYear < 1900 or controlYear > int(time.strftime('%Y')):
 					warningConnexion = True
 
-			currentTime = time.time()
-			formatDate = str(controlDay) + "/" + str(controlMonth) + "/" + str(controlYear)
-			
-			try:
-				result = time.mktime(datetime.datetime.strptime(formatDate, "%d/%m/%Y").timetuple())
-			except ValueError:
-				warningConnexion = True
-			else:
-				if result > currentTime:
-					warningConnexion = True
+			if warningConnexion == False:
+				if controlMonth == 4 or controlMonth == 6 or controlMonth == 9 or controlMonth == 11:
+					if controlDay == 31:
+						warningConnexion = True
+
+				if controlYear % 4 == 0:
+					if controlYear % 100 == 0:
+						if controlYear % 400 == 0:
+							bisextile = True
+						else:
+							bisextile = False
+					else:
+						bisextile = True
+				else:
+					bisextile = False
+				
+				if controlMonth == 2 and bisextile == True:
+					if controlDay > 29:
+						warningConnexion = True
+				elif controlMonth == 2 and bisextile == False:
+					if controlDay > 28:
+						warningConnexion = True
+
+				if controlYear > 1969:
+					currentTime = time.time()
+					formatDate = str(controlDay) + "/" + str(controlMonth) + "/" + str(controlYear)
+				
+					try:
+						result = time.mktime(datetime.datetime.strptime(formatDate, "%d/%m/%Y").timetuple())
+					except ValueError:
+						warningConnexion = True
+					else:
+						if result > currentTime:
+							warningConnexion = True
 
 			if warningConnexion:
 				self.labelWarningConnexion = Label(self.mainPage.application, text="Date de naissance incorrecte", font=self.mainPage.largeFont)
@@ -223,4 +247,4 @@ class createAccountWindowOne:
 				self.mainPage.changeCreateAccountOneToCreateAccountTwo()
 
 
-				# TODO : problem with timestamp for people born before 1970
+				# TODO : problem with days and months 08 and 09
