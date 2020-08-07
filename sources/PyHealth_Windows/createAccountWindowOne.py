@@ -59,10 +59,15 @@ class createAccountWindowOne:
 			self.entryBirthDay.insert(0, 'JJ')
 			self.entryBirthDay.config(fg = "grey")
 		else:
-			self.entryBirthDay.insert(0, self.mainPage.currentUser.userDayOfBirth)
-			self.entryBirthDay.config(fg = 'black')
+			if self.mainPage.currentUser.userDayOfBirth < 10:
+				self.entryBirthDay.insert(0, "0" + str(self.mainPage.currentUser.userDayOfBirth))
+				self.entryBirthDay.config(fg = 'black')
+			else:
+				self.entryBirthDay.insert(0, self.mainPage.currentUser.userDayOfBirth)
+				self.entryBirthDay.config(fg = 'black')
 		self.entryBirthDay.bind('<FocusIn>', self.entryBirthDay_click)
 		self.entryBirthDay.bind('<FocusOut>', self.entryBirthDay_focusout)
+		self.entryBirthDay.bind('<KeyPress>', self.jumpToMonth)
 
 		self.labelSlash1 = Label(self.mainPage.application, text=" / ", font=self.mainPage.normalFont)
 		self.labelSlash1['bg'] = "#E4E4E4"
@@ -73,10 +78,15 @@ class createAccountWindowOne:
 			self.entryBirthMonth.insert(0, 'MM')
 			self.entryBirthMonth.config(fg = "grey")
 		else:
-			self.entryBirthMonth.insert(0, self.mainPage.currentUser.userMonthOfBirth)
-			self.entryBirthMonth.config(fg = 'black')
+			if self.mainPage.currentUser.userMonthOfBirth < 10:
+				self.entryBirthMonth.insert(0, "0" + str(self.mainPage.currentUser.userMonthOfBirth))
+				self.entryBirthMonth.config(fg = 'black')
+			else:
+				self.entryBirthMonth.insert(0, self.mainPage.currentUser.userMonthOfBirth)
+				self.entryBirthMonth.config(fg = 'black')
 		self.entryBirthMonth.bind('<FocusIn>', self.entryBirthMonth_click)
 		self.entryBirthMonth.bind('<FocusOut>', self.entryBirthMonth_focusout)
+		self.entryBirthMonth.bind('<KeyPress>', self.jumpToYear)
 
 		self.labelSlash2 = Label(self.mainPage.application, text=" / ", font=self.mainPage.normalFont)
 		self.labelSlash2['bg'] = "#E4E4E4"
@@ -154,6 +164,16 @@ class createAccountWindowOne:
 			self.entryBirthYear.insert(0, 'AAAA')
 			self.entryBirthYear.config(fg = 'grey')
 
+	def jumpToMonth(self, event):
+		""" Automatic jump to the Month aera when user enter 2 Day's inputs """ 
+		if len(self.entryBirthDay.get()) == 1:
+			self.entryBirthMonth.focus()
+
+	def jumpToYear(self, event):
+		""" Automatic jump to the Year aera when user enter 2 Month's inputs """ 
+		if len(self.entryBirthMonth.get()) == 1:
+			self.entryBirthYear.focus()
+
 	def validateFirstPart(self):
 		""" Validate the inputs :
 		- if the first name is not set : error message and retry
@@ -173,6 +193,18 @@ class createAccountWindowOne:
 			self.labelWarningConnexion.place(x=25, y=365)
 			self.entryFirstName.focus()
 		else:
+			if self.entryBirthDay.get() == "08":
+				self.varBirthDay.set(8)
+
+			if self.entryBirthDay.get() == "09":
+				self.varBirthDay.set(9)
+
+			if self.entryBirthMonth.get() == "08":
+				self.varBirthMonth.set(8)
+
+			if self.entryBirthMonth.get() == "09":
+				self.varBirthMonth.set(9)
+
 			try:
 				controlDay = int(self.varBirthDay.get())
 			except:
@@ -237,6 +269,24 @@ class createAccountWindowOne:
 				self.labelWarningConnexion['bg'] = "#E4E4E4"
 				self.labelWarningConnexion['fg'] = "#FF0000"
 				self.labelWarningConnexion.place(x=25, y=365)
+				try:
+					controlDay = int(self.varBirthDay.get())
+				except:
+					pass
+				else:
+					if controlDay < 10:
+						self.entryBirthDay.delete(0, 'end')
+						self.entryBirthDay.insert(0, "0" + str(controlDay))
+						self.entryBirthDay.config(fg = 'black')
+				try:
+					controlMonth = int(self.varBirthMonth.get())
+				except:
+					pass
+				else:
+					if controlMonth < 10:
+						self.entryBirthMonth.delete(0, 'end')
+						self.entryBirthMonth.insert(0, "0" + str(controlMonth))
+						self.entryBirthMonth.config(fg = 'black')
 				self.entryBirthDay.focus()
 			else:
 				self.mainPage.currentUser.userFirstName = self.varFirstName.get()
@@ -246,5 +296,4 @@ class createAccountWindowOne:
 				self.mainPage.currentUser.userYearOfBirth = self.varBirthYear.get()
 				self.mainPage.changeCreateAccountOneToCreateAccountTwo()
 
-
-				# TODO : problem with days and months 08 and 09
+				# TODO : Block Year with 4 inputs
