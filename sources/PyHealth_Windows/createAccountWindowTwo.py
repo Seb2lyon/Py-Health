@@ -83,7 +83,7 @@ class createAccountWindowTwo:
 		try:
 			while True:
 				userExtract = myUnplickler.load()
-				if userExtract.userPseudo == self.varPseudo.get():
+				if userExtract.userPseudo.upper() == self.varPseudo.get().upper():
 					self.pseudoExist = True
 		except:
 			pass
