@@ -3,7 +3,7 @@ from PyHealth_User.userClass import *
 from PyHealth_Windows.welcomeWindow import *
 from PyHealth_Windows.createAccountWindowOne import *
 from PyHealth_Windows.createAccountWindowTwo import *
-from PyHealth_Windows.createSummaryWindow import *
+from PyHealth_Windows.summaryWindow import *
 
 class mainWindow(Frame):
 	""" Main window : manager of the application
@@ -59,7 +59,7 @@ class mainWindow(Frame):
 		to
 		Summary window """ 	
 		self.delWelcomeWindow()
-		self.createSummary = createSummaryWindow(self)
+		self.summary = summaryWindow(self)
 
 	def changeMainToCreateAccountOne(self):
 		""" Function that permit to jump from
@@ -91,7 +91,7 @@ class mainWindow(Frame):
 		to
 		Summary window """ 	
 		self.delCreateAccountWindowTwo()
-		self.createSummary = createSummaryWindow(self)
+		self.summary = summaryWindow(self)
 
 	def delWelcomeWindow(self):
 		""" Destroy Welcome window """
