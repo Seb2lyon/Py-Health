@@ -48,6 +48,7 @@ class mainWindow(Frame):
 
 		self.welcome = welcomeWindow(self)
 
+
 	def goToUrl(self, url):
 		""" Function that permit to open a web browser
 		in order to open my web site home page """

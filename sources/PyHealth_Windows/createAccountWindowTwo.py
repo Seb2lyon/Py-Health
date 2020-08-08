@@ -13,6 +13,8 @@ class createAccountWindowTwo:
 		
 		self.mainPage = page
 
+		self.mainPage.application.bind('<KeyRelease-Return>', self.pressReturn)
+
 		self.varPseudo = StringVar()
 		self.varPasswd1 = StringVar()
 		self.varPasswd2 = StringVar()
@@ -62,6 +64,11 @@ class createAccountWindowTwo:
 
 		self.entryPseudo.focus()
 
+
+	def pressReturn(self, event):
+		""" Manage the action when user press the key Enter """
+		self.validateSecondPart()
+
 	def goBackPageOne(self):
 		""" Go back to the Create account page 1 """
 		self.mainPage.changeCreateAccountTwoToCreateAccountOne()
@@ -96,7 +103,7 @@ class createAccountWindowTwo:
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=360)
 			self.entryPseudo.focus()
-		if self.pseudoExist == True:
+		elif self.pseudoExist == True:
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Cet identifiant est déjà pris.", font=self.mainPage.largeFont)
 			self.labelWarningConnexion['bg'] = "#E4E4E4"
 			self.labelWarningConnexion['fg'] = "#FF0000"

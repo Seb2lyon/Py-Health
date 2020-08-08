@@ -12,6 +12,8 @@ class welcomeWindow:
 
 		self.mainPage = page
 
+		self.mainPage.application.bind('<KeyRelease-Return>', self.pressReturn)
+
 		self.imgSubTitle = PhotoImage(file="images/Sous-titre.gif")
 
 		self.varID = StringVar()
@@ -63,7 +65,11 @@ class welcomeWindow:
 		self.labelCreateAccount.place(x=295, y=416)
 
 		self.entryID.focus()
+		
 
+	def pressReturn(self, event):
+		""" Manage the action when user press the key Enter """
+		self.checkCredentials()
 
 	def checkCredentials(self):
 		""" Function that permit to chek the credentials

@@ -12,6 +12,8 @@ class summaryWindow:
 		
 		self.mainPage = page
 
+		self.mainPage.application.bind('<KeyRelease-Return>', self.pressReturn)
+
 		welcomeString = "Bienvenue " + self.mainPage.currentUser.userFirstName + ","
 
 		self.labelCheck1 = Label(self.mainPage.application, text=welcomeString, font=self.mainPage.largeFont)
@@ -62,7 +64,7 @@ class summaryWindow:
 			self.labelGender2 = Label(self.mainPage.application, text="homme", font=self.mainPage.largeFont)
 			self.labelBirthDate1 = Label(self.mainPage.application, text="Vous êtes né le ", font=self.mainPage.largeFont)	
 			self.labelGender2.place(x=155, y= 266)
-			self.labelBirthDate2.place(x=176, y=297)
+			self.labelBirthDate2.place(x=178, y=297)
 
 		self.labelGender1['bg'] = "#E4E4E4"
 		self.labelGender1['fg'] = "#993300"	
@@ -92,3 +94,9 @@ class summaryWindow:
 		self.labelFirstName2.place(x=192, y=235)
 		self.labelGender1.place(x=33, y=266)
 		self.labelBirthDate1.place(x=33, y=297)
+
+
+	def pressReturn(self, event):
+		""" Manage the action when user press the key Enter """
+		pass
+

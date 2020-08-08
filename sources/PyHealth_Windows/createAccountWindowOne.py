@@ -14,6 +14,8 @@ class createAccountWindowOne:
 		
 		self.mainPage = page
 
+		self.mainPage.application.bind('<KeyRelease-Return>', self.pressReturn)
+
 		self.varFirstName = StringVar()
 		self.varFirstName.set(self.mainPage.currentUser.userFirstName)
 
@@ -132,6 +134,10 @@ class createAccountWindowOne:
 
 		self.entryFirstName.focus()
 
+
+	def pressReturn(self, event):
+		""" Manage the action when user press the key Enter """
+		self.validateFirstPart()
 
 	def entryBirthDay_click(self, event):
 		""" Wait for the user's input for Day """
