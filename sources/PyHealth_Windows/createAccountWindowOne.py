@@ -54,6 +54,8 @@ class createAccountWindowOne:
 		self.varBirthMonth.set('')
 		self.varBirthYear.set('')
 
+		self.jumpDay = 0
+
 		self.entryBirthDay = Entry(self.mainPage.application, textvariable=self.varBirthDay, width=3, font=self.mainPage.normalInputFont)
 		if self.mainPage.currentUser.userDayOfBirth == '':
 			self.entryBirthDay.insert(0, 'JJ')
@@ -67,7 +69,7 @@ class createAccountWindowOne:
 				self.entryBirthDay.config(fg = 'black')
 		self.entryBirthDay.bind('<FocusIn>', self.entryBirthDay_click)
 		self.entryBirthDay.bind('<FocusOut>', self.entryBirthDay_focusout)
-		self.entryBirthDay.bind('<KeyPress>', self.jumpToMonth)
+		self.entryBirthDay.bind('<KeyRelease>', self.jumpToMonth)
 
 		self.labelSlash1 = Label(self.mainPage.application, text=" / ", font=self.mainPage.normalFont)
 		self.labelSlash1['bg'] = "#E4E4E4"
@@ -86,7 +88,7 @@ class createAccountWindowOne:
 				self.entryBirthMonth.config(fg = 'black')
 		self.entryBirthMonth.bind('<FocusIn>', self.entryBirthMonth_click)
 		self.entryBirthMonth.bind('<FocusOut>', self.entryBirthMonth_focusout)
-		self.entryBirthMonth.bind('<KeyPress>', self.jumpToYear)
+		self.entryBirthMonth.bind('<KeyRelease>', self.jumpToYear)
 
 		self.labelSlash2 = Label(self.mainPage.application, text=" / ", font=self.mainPage.normalFont)
 		self.labelSlash2['bg'] = "#E4E4E4"
@@ -101,6 +103,7 @@ class createAccountWindowOne:
 			self.entryBirthYear.config(fg = 'black')
 		self.entryBirthYear.bind('<FocusIn>', self.entryBirthYear_click)
 		self.entryBirthYear.bind('<FocusOut>', self.entryBirthYear_focusout)
+		self.entryBirthYear.bind('<KeyRelease>', self.jumpToNextButton)
 
 		self.labelWarningConnexion = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
 		self.labelWarningConnexion['bg'] = "#E4E4E4"
@@ -166,13 +169,18 @@ class createAccountWindowOne:
 
 	def jumpToMonth(self, event):
 		""" Automatic jump to the Month aera when user enter 2 Day's inputs """ 
-		if len(self.entryBirthDay.get()) == 1:
+		if len(self.entryBirthDay.get()) == 2:
 			self.entryBirthMonth.focus()
 
 	def jumpToYear(self, event):
 		""" Automatic jump to the Year aera when user enter 2 Month's inputs """ 
-		if len(self.entryBirthMonth.get()) == 1:
+		if len(self.entryBirthMonth.get()) == 2:
 			self.entryBirthYear.focus()
+
+	def jumpToNextButton(self, event):
+		""" Automatic jump to the Next button when user enter 4 Year's inputs """ 
+		if len(self.entryBirthYear.get()) == 4:
+			self.buttonNext.focus()
 
 	def validateFirstPart(self):
 		""" Validate the inputs :
@@ -295,5 +303,3 @@ class createAccountWindowOne:
 				self.mainPage.currentUser.userMonthOfBirth = self.varBirthMonth.get()
 				self.mainPage.currentUser.userYearOfBirth = self.varBirthYear.get()
 				self.mainPage.changeCreateAccountOneToCreateAccountTwo()
-
-				# TODO : Block Year with 4 inputs

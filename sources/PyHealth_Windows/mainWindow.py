@@ -48,9 +48,17 @@ class mainWindow(Frame):
 		self.welcome = welcomeWindow(self)
 
 	def goToUrl(self, url):
-		""" Fonction that permit to open a web browser
+		""" Function that permit to open a web browser
 		in order to open my web site home page """
 		webbrowser.open_new(url)
+
+	def changeMainToSummary(self):
+		""" Function that permit to jump from
+		Welcome window
+		to
+		Summary window """ 	
+		self.delWelcomeWindow()
+		# CALL SUMMARY WINDOW
 
 	def changeMainToCreateAccountOne(self):
 		""" Function that permit to jump from
@@ -93,7 +101,7 @@ class mainWindow(Frame):
 		self.welcome.labelPass.destroy()
 		self.welcome.entryPass.destroy()
 		self.welcome.buttonConnect.destroy()
-		# self.welcome.warningConnexion.destroy()
+		self.welcome.labelWarningConnexion.destroy()
 		self.welcome.labelNoAccount.destroy()
 		self.welcome.labelCreateAccount.destroy()
 		del self.welcome
@@ -130,4 +138,5 @@ class mainWindow(Frame):
 		del self.createAccountTwo
 
 
-		# TODO : Continue with the Summary window + destroy Warning of the Welcome page
+		# TODO : Continue with the Summary window
+		

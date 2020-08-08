@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter.font import *
+import pickle
 
 class welcomeWindow:
 	""" Insert to the Main window of the application
@@ -34,13 +35,13 @@ class welcomeWindow:
 
 		self.entryPass = Entry(self.mainPage.application, textvariable=self.varPass, width=55, font=self.mainPage.normalInputFont, show="*")
 
-		self.buttonConnect = Button(self.mainPage.application, text="Connexion", font=self.mainPage.normalFont, width=10)
+		self.buttonConnect = Button(self.mainPage.application, text="Connexion", font=self.mainPage.normalFont, width=10, command=self.checkCredentials)
 		self.buttonConnect['bg'] = "#969696"
 		self.buttonConnect['fg'] = "#FFFFFF"
 
-		# self.warningConnexion = Label(self.mainPage.application, text="Identifiant et/ou mot de passe incorrect", font=self.mainPage.largeFont)
-		# self.warningConnexion['bg'] = "#E4E4E4"
-		# self.warningConnexion['fg'] = "#FF0000"
+		self.labelWarningConnexion = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
+		self.labelWarningConnexion['bg'] = "#E4E4E4"
+		self.labelWarningConnexion['fg'] = "#FF0000"
 
 		self.labelNoAccount = Label(self.mainPage.application, text="Vous n'avez pas de compte ?", font=self.mainPage.normalItalicFont)
 		self.labelNoAccount['bg'] = "#E4E4E4"
@@ -58,13 +59,63 @@ class welcomeWindow:
 		self.labelPass.place(x=25, y=267)
 		self.entryPass.place(x=27, y=295)
 		self.buttonConnect.place(x=190, y=330)
-		# self.warningConnexion.place(x=71, y=375)
+		self.labelWarningConnexion.place(x=30, y=380)
 		self.labelNoAccount.place(x=30, y=416)
 		self.labelCreateAccount.place(x=295, y=416)
 
 		self.entryID.focus()
 
+	def checkCredentials(self):
+		""" Function that permit to chek the credentials
+		- if the user exist in the users' list file : create current user and go to the summary page
+		- if the user did not exist in the users' file : warning message """
+		self.labelWarningConnexion.destroy()
 
-		# TODO : Warning if account didn't exist in the account file OR no ID input OR no passwd input
-		# TODO : Manage the credential to load the account if it exists in the accounts file
+		if self.entryID.get() == "":
+			self.labelWarningConnexion = Label(self.mainPage.application, text="Identifiant obligatoire", font=self.mainPage.largeFont)
+			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['fg'] = "#FF0000"
+			self.labelWarningConnexion.place(x=30, y=380)
+			self.entryID.focus()
 
+		elif self.entryPass.get() == "":
+			self.labelWarningConnexion = Label(self.mainPage.application, text="Mot de passe obligatoire", font=self.mainPage.largeFont)
+			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['fg'] = "#FF0000"
+			self.labelWarningConnexion.place(x=30, y=380)
+			self.entryPass.focus()
+
+		else:
+			file = open("PyHealth_User/users", "rb")
+			myUnpickler = pickle.Unpickler(file)
+			appUsers = []
+
+			try:
+				while True:
+					oneUser = myUnpickler.load()
+					appUsers.append(oneUser)
+			except:
+				pass
+
+			file.close()
+
+			nbrUsers = len(appUsers)
+
+			userExist = False
+
+			i = 0
+
+			while i < nbrUsers:
+				if appUsers[i].userPseudo == self.entryID.get() and appUsers[i].userPasswd == self.entryPass.get():
+					userExist = True
+					self.mainPage.currentUser = appUsers[i]
+				i = i + 1
+
+			if userExist:
+				self.mainPage.changeMainToSummary()	
+			else:
+				self.labelWarningConnexion = Label(self.mainPage.application, text="Identifiant et/ou mot de passe incorrect", font=self.mainPage.largeFont)
+				self.labelWarningConnexion['bg'] = "#E4E4E4"
+				self.labelWarningConnexion['fg'] = "#FF0000"
+				self.labelWarningConnexion.place(x=30, y=380)
+				self.entryID.focus()
