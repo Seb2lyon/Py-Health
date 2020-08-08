@@ -38,7 +38,6 @@ class welcomeWindow:
 		self.buttonConnect = Button(self.mainPage.application, text="Connexion", font=self.mainPage.normalFont, width=10, command=self.checkCredentials)
 		self.buttonConnect['bg'] = "#969696"
 		self.buttonConnect['fg'] = "#FFFFFF"
-
 		self.labelWarningConnexion = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
 		self.labelWarningConnexion['bg'] = "#E4E4E4"
 		self.labelWarningConnexion['fg'] = "#FF0000"
@@ -64,6 +63,7 @@ class welcomeWindow:
 		self.labelCreateAccount.place(x=295, y=416)
 
 		self.entryID.focus()
+
 
 	def checkCredentials(self):
 		""" Function that permit to chek the credentials

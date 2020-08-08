@@ -85,6 +85,23 @@ class mainWindow(Frame):
 		self.delCreateAccountWindowTwo()
 		self.createAccountOne = createAccountWindowOne(self)
 
+	def changeCreateAccountOneToMain(self):
+		""" Function that permit to jump from
+		Creating account (page 1/2)
+		to
+		Main window """
+		self.delCreateAccountWindowOne()
+
+		self.currentUser.userFirstName = ""
+		self.currentUser.userGender = "F"
+		self.currentUser.userDayOfBirth = ""
+		self.currentUser.userMonthOfBirth = ""
+		self.currentUser.userYearOfBirth = ""
+		self.currentUser.userPseudo = ""
+		self.currentUser.userPasswd = ""
+
+		self.welcome = welcomeWindow(self) 	
+
 	def changeCreateAccountTwoToSummary(self):
 		""" Function that permit to jump from
 		Creating account (page 2/2)
@@ -122,6 +139,7 @@ class mainWindow(Frame):
 		self.createAccountOne.labelSlash1.destroy()
 		self.createAccountOne.labelSlash2.destroy()
 		self.createAccountOne.labelWarningConnexion.destroy()
+		self.createAccountOne.buttonCancel.destroy()
 		self.createAccountOne.buttonNext.destroy()
 		del self.createAccountOne
 

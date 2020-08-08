@@ -109,6 +109,10 @@ class createAccountWindowOne:
 		self.labelWarningConnexion['bg'] = "#E4E4E4"
 		self.labelWarningConnexion['fg'] = "#FF0000"
 
+		self.buttonCancel = Button(self.mainPage.application, text="Annuler", font=self.mainPage.normalFont, width=10, command=self.cancelCreateAccount)
+		self.buttonCancel['bg'] = "#969696"
+		self.buttonCancel['fg'] = "#FFFFFF"
+
 		self.buttonNext = Button(self.mainPage.application, text="Suivant", font=self.mainPage.normalFont, width=10, command=self.validateFirstPart)
 		self.buttonNext['bg'] = "#969696"
 		self.buttonNext['fg'] = "#FFFFFF"
@@ -123,6 +127,7 @@ class createAccountWindowOne:
 		self.labelSlash2.place(x=105, y=326)
 		self.entryBirthYear.place(x=127, y=330)
 		self.labelWarningConnexion.place(x=25, y=365)
+		self.buttonCancel.place(x=57, y=404)
 		self.buttonNext.place(x=329, y=404)
 
 		self.entryFirstName.focus()
@@ -181,6 +186,10 @@ class createAccountWindowOne:
 		""" Automatic jump to the Next button when user enter 4 Year's inputs """ 
 		if len(self.entryBirthYear.get()) == 4:
 			self.buttonNext.focus()
+
+	def cancelCreateAccount(self):
+		""" Cancel the creating account process """
+		self.mainPage.changeCreateAccountOneToMain()
 
 	def validateFirstPart(self):
 		""" Validate the inputs :
