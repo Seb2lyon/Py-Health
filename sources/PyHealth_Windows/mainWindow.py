@@ -4,6 +4,7 @@ from PyHealth_Windows.welcomeWindow import *
 from PyHealth_Windows.createAccountWindowOne import *
 from PyHealth_Windows.createAccountWindowTwo import *
 from PyHealth_Windows.summaryWindow import *
+from PyHealth_Windows.heightAndWeightWindow import *
 
 class mainWindow(Frame):
 	""" Main window : manager of the application
@@ -156,6 +157,14 @@ class mainWindow(Frame):
 		del self.currentUser
 		self.currentUser = userClass()
 		self.welcome = welcomeWindow(self)
+
+	def changeSummaryToHeightAndWeight(self):
+		""" Function that permit to jump from
+		Summary
+		to
+		Height and Weight window """ 
+		self.delSummaryWindow()
+		self.heightAndWeight = heightAndWeightWindow(self) 
 
 	def delWelcomeWindow(self):
 		""" Destroy Welcome window """

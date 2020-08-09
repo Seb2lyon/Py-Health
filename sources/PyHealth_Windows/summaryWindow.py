@@ -104,8 +104,7 @@ class summaryWindow:
 
 	def pressReturn(self, event):
 		""" Manage the action when user press the key Enter """
-		pass
-		# Activate Validate button
+		self.validateProfile()
 
 	def modifyProfile(self):
 		""" Go back to the Create account page 1 """
@@ -148,9 +147,8 @@ class summaryWindow:
 			self.mainPage.changeSummaryToMain()
 
 	def validateProfile(self):
-		""" Validation of the profile datas to continue to the size and weight page """
-		pass
-		# Continue the app
+		""" Continue to the Size and weight page """
+		self.mainPage.changeSummaryToHeightAndWeight()
 
 		
 
