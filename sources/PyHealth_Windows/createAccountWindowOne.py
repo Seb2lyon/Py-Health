@@ -194,8 +194,11 @@ class createAccountWindowOne:
 			self.buttonNext.focus()
 
 	def cancelCreateAccount(self):
-		""" Cancel the creating account process """
-		self.mainPage.changeCreateAccountOneToMain()
+		""" Cancel the creating account/modify account process """
+		if self.mainPage.currentUser.userExist == False:
+			self.mainPage.changeCreateAccountOneToMain()
+		else:
+			self.mainPage.changeCreateAccountOneToSummary()
 
 	def validateFirstPart(self):
 		""" Validate the inputs :

@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter.font import *
 import pickle
+import hashlib
 
 class welcomeWindow:
 	""" Insert to the Main window of the application
@@ -111,8 +112,12 @@ class welcomeWindow:
 
 			i = 0
 
+			inputPassword = self.varPass.get()
+			inputPassword = inputPassword.encode()
+			hashedPassword = hashlib.sha1(inputPassword).hexdigest()
+
 			while i < nbrUsers:
-				if appUsers[i].userPseudo.upper() == self.entryID.get().upper() and appUsers[i].userPasswd == self.entryPass.get():
+				if appUsers[i].userPseudo.upper() == self.entryID.get().upper() and appUsers[i].userPasswd == hashedPassword:
 					userExist = True
 					self.mainPage.currentUser = appUsers[i]
 				i = i + 1

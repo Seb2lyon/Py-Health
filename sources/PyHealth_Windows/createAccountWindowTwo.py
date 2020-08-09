@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter.messagebox import *
 import pickle
+import hashlib
 
 class createAccountWindowTwo:
 	""" Insert to the Main window of the application
@@ -103,7 +104,7 @@ class createAccountWindowTwo:
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=360)
 			self.entryPseudo.focus()
-		elif self.pseudoExist == True:
+		elif self.pseudoExist == True and self.mainPage.currentUser.userExist == False:
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Cet identifiant est déjà pris.", font=self.mainPage.largeFont)
 			self.labelWarningConnexion['bg'] = "#E4E4E4"
 			self.labelWarningConnexion['fg'] = "#FF0000"
@@ -128,8 +129,12 @@ class createAccountWindowTwo:
 			self.labelWarningConnexion.place(x=25, y=360)
 			self.entryPasswd1.focus()
 		else:
+			userPassword = self.varPasswd1.get()
+			userPassword = userPassword.encode()
+			hashedPassword = hashlib.sha1(userPassword).hexdigest()
+
 			self.mainPage.currentUser.userPseudo = self.varPseudo.get()
-			self.mainPage.currentUser.userPasswd = self.varPasswd1.get()
+			self.mainPage.currentUser.userPasswd = hashedPassword
 			if self.mainPage.currentUser.userExist == True:
 				file = open("PyHealth_User/users", "rb")
 				myUnplickler = pickle.Unpickler(file)
@@ -154,7 +159,7 @@ class createAccountWindowTwo:
 					i = i + 1
 				file.close()
 
-				showinfo(title="Py Health - Compte mis à jour", message="Félicitations!\nVotre compte \"Py Health\" à bien été mis à jour...")
+				showinfo(title="Py Health - Compte mis à jour", message="Félicitations!\nVotre compte \"Py Health\" a bien été mis à jour...")
 			
 			else:
 				self.mainPage.currentUser.userExist = True
@@ -178,6 +183,6 @@ class createAccountWindowTwo:
 				myPickler.dump(self.mainPage.currentUser)
 				file.close()
 
-				showinfo(title="Py Health - Compte créé", message="Félicitations!\nVotre compte \"Py Health\" à été créé avec succès...")
+				showinfo(title="Py Health - Compte créé", message="Félicitations!\nVotre compte \"Py Health\" a été créé avec succès...")
 				
 			self.mainPage.changeCreateAccountTwoToSummary()

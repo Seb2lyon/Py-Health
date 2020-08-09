@@ -93,13 +93,8 @@ class mainWindow(Frame):
 		Main window """
 		self.delCreateAccountWindowOne()
 
-		self.currentUser.userFirstName = ""
-		self.currentUser.userGender = "F"
-		self.currentUser.userDayOfBirth = ""
-		self.currentUser.userMonthOfBirth = ""
-		self.currentUser.userYearOfBirth = ""
-		self.currentUser.userPseudo = ""
-		self.currentUser.userPasswd = ""
+		del self.currentUser
+		self.currentUser = userClass()
 
 		self.welcome = welcomeWindow(self) 	
 
@@ -110,6 +105,57 @@ class mainWindow(Frame):
 		Summary window """ 	
 		self.delCreateAccountWindowTwo()
 		self.summary = summaryWindow(self)
+
+	def changeSummaryToCreateAccountOne(self):
+		""" Function that permit to jump from
+		Summary
+		to
+		Creating account (page 1/2) """ 
+		self.delSummaryWindow()
+		self.createAccountOne = createAccountWindowOne(self)	
+
+	def changeCreateAccountOneToSummary(self):
+		""" Function that permit to jump from
+		Creating account (page 1/2)
+		to
+		Summary """ 
+		self.delCreateAccountWindowOne()
+
+		file = open("PyHealth_User/users", "rb")
+
+		myUnpickler = pickle.Unpickler(file)
+		appUsers = []
+		
+		try:
+			while True:
+				oneUser = myUnpickler.load()
+				appUsers.append(oneUser)
+		except:
+			pass
+
+		file.close()
+
+		nbrUsers = len(appUsers)
+		i = 0
+
+		while i < nbrUsers:
+			if appUsers[i].userPseudo == self.currentUser.userPseudo:
+				del self.currentUser
+				self.currentUser = appUsers[i]
+			i = i + 1
+
+		self.summary = summaryWindow(self)
+
+	def changeSummaryToMain(self):
+		""" Function that permit to jump from
+		Summary
+		to
+		Main window """ 
+
+		self.delSummaryWindow()
+		del self.currentUser
+		self.currentUser = userClass()
+		self.welcome = welcomeWindow(self)
 
 	def delWelcomeWindow(self):
 		""" Destroy Welcome window """
@@ -156,3 +202,19 @@ class mainWindow(Frame):
 		self.createAccountTwo.buttonPrevious.destroy()
 		self.createAccountTwo.buttonValidate.destroy()
 		del self.createAccountTwo
+
+	def delSummaryWindow(self):
+		""" Destroy Summary window """
+		self.summary.labelCheck1.destroy()
+		self.summary.labelCheck2.destroy()
+		self.summary.labelCheck3.destroy()
+		self.summary.labelFirstName1.destroy()
+		self.summary.labelFirstName2.destroy()
+		self.summary.labelGender1.destroy()
+		self.summary.labelGender2.destroy()
+		self.summary.labelBirthDate1.destroy()
+		self.summary.labelBirthDate2.destroy()
+		self.summary.buttonModify.destroy()
+		self.summary.buttonConfirm.destroy()
+		self.summary.labelDeleteAccount.destroy()
+		del self.summary

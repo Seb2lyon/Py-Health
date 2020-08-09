@@ -6,7 +6,11 @@ class userClass:
 	- Month of birth
 	- Year of birth
 	- Pseudo
-	- Password (hashed) """
+	- Password (hashed)
+	- Height
+	- Weight
+	- Historic of BMI (results)
+	- Historic of BMI (dates) """
 
 	def __init__(self):
 
@@ -18,12 +22,7 @@ class userClass:
 		self.userYearOfBirth = ""
 		self.userPseudo = ""
 		self.userPasswd = ""
-		# HASH THE PASSWORD
-
 		self.userHeight = ""
 		self.userWeight = ""
 		self.userBMI = [] 
 		self.lastVisits = [] 
-
-		#TODO : Hash the password
-		

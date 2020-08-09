@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter.messagebox import *
+import pickle
 
 class summaryWindow:
 	""" Insert to the Main window of the application
@@ -56,15 +58,15 @@ class summaryWindow:
 		if self.mainPage.currentUser.userGender == "F":
 			self.labelGender1 = Label(self.mainPage.application, text="Vous êtes une ", font=self.mainPage.largeFont)
 			self.labelGender2 = Label(self.mainPage.application, text="femme", font=self.mainPage.largeFont)
-			self.labelBirthDate1 = Label(self.mainPage.application, text="Vous êtes née le ", font=self.mainPage.largeFont)	
+			self.labelBirthDate1 = Label(self.mainPage.application, text="Vous êtes née le", font=self.mainPage.largeFont)	
 			self.labelGender2.place(x=165, y= 266)
 			self.labelBirthDate2.place(x=186, y=297)
 		else:
 			self.labelGender1 = Label(self.mainPage.application, text="Vous êtes un ", font=self.mainPage.largeFont)
 			self.labelGender2 = Label(self.mainPage.application, text="homme", font=self.mainPage.largeFont)
-			self.labelBirthDate1 = Label(self.mainPage.application, text="Vous êtes né le ", font=self.mainPage.largeFont)	
+			self.labelBirthDate1 = Label(self.mainPage.application, text="Vous êtes né le", font=self.mainPage.largeFont)	
 			self.labelGender2.place(x=155, y= 266)
-			self.labelBirthDate2.place(x=178, y=297)
+			self.labelBirthDate2.place(x=176, y=297)
 
 		self.labelGender1['bg'] = "#E4E4E4"
 		self.labelGender1['fg'] = "#993300"	
@@ -75,17 +77,18 @@ class summaryWindow:
 		self.labelBirthDate2['bg'] = "#E4E4E4"
 		self.labelBirthDate2['fg'] = "#008000"
 
+		self.buttonModify = Button(self.mainPage.application, text="Modifiez", font=self.mainPage.normalFont, width=10, command=self.modifyProfile)
+		self.buttonModify['bg'] = "#969696"
+		self.buttonModify['fg'] = "#FFFFFF"
 
+		self.buttonConfirm = Button(self.mainPage.application, text="Confirmez", font=self.mainPage.normalFont, width=10, command=self.validateProfile)
+		self.buttonConfirm['bg'] = "#969696"
+		self.buttonConfirm['fg'] = "#FFFFFF"
 
-
-
-
-		# TO BE CONTINUED
-
-
-
-
-
+		self.labelDeleteAccount = Label(self.mainPage.application, text="Supprimez votre compte", font=self.mainPage.normalLinkFont, cursor="hand2")
+		self.labelDeleteAccount['bg'] = "#E4E4E4"
+		self.labelDeleteAccount['fg'] = "#000000"
+		self.labelDeleteAccount.bind("<Button-1>", lambda e: self.deleteAccountProcess())	
 
 		self.labelCheck1.place(x=33, y=140)
 		self.labelCheck2.place(x=33, y=163)
@@ -94,9 +97,63 @@ class summaryWindow:
 		self.labelFirstName2.place(x=192, y=235)
 		self.labelGender1.place(x=33, y=266)
 		self.labelBirthDate1.place(x=33, y=297)
+		self.buttonModify.place(x=57, y=354)
+		self.buttonConfirm.place(x=329, y=354)
+		self.labelDeleteAccount.place(x=150, y=415)
 
 
 	def pressReturn(self, event):
 		""" Manage the action when user press the key Enter """
 		pass
+		# Activate Validate button
 
+	def modifyProfile(self):
+		""" Go back to the Create account page 1 """
+		self.mainPage.changeSummaryToCreateAccountOne()
+
+	def deleteAccountProcess(self):
+		""" Delete the account of the current user """
+		cancelAnswer = askokcancel(title="Py Health - Supprimer le compte", message="Souhaitez-vous réellement supprimer votre compte \"Py Health\" ?")
+		if cancelAnswer == True:
+			file = open("PyHealth_User/users", "rb")
+			myUnpickler = pickle.Unpickler(file)
+			appUsers = []
+			newAppUsers = []
+			try:
+				while True:
+					oneUser = myUnpickler.load()
+					appUsers.append(oneUser)
+			except:
+				pass
+			file.close()
+
+			nbrUsers = len(appUsers)
+			i = 0
+			while i < nbrUsers:
+				if appUsers[i].userPseudo != self.mainPage.currentUser.userPseudo:
+					newAppUsers.append(appUsers[i])
+				i = i + 1
+
+			file = open("PyHealth_User/users", "wb")
+			myPickler = pickle.Pickler(file)
+			nbrUsers = len(newAppUsers)
+			i = 0
+			while i < nbrUsers:
+				myPickler.dump(newAppUsers[i])
+				i = i + 1
+			file.close()
+
+			showinfo(title="Py Health - Compte supprimé", message="Votre compte \"Py Health\" a bien été supprimé !\nEn espérant vous revoir bientôt...")
+
+			self.mainPage.changeSummaryToMain()
+
+	def validateProfile(self):
+		""" Validation of the profile datas to continue to the size and weight page """
+		pass
+		# Continue the app
+
+		
+
+		# TODO : Activate Return key -> validate button
+		# TODO : Validate button -> continue the app
+		
