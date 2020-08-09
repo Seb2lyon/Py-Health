@@ -30,6 +30,7 @@ class mainWindow(Frame):
 		self.largeFont = Font(family="Arial Black", size=12)
 
 		self.currentUser = userClass()
+		self.currentBMI = 0
 
 		self.imgBanner = PhotoImage(file="images/Titre.gif")
 		self.banner = Label(self.application, height=106, image=self.imgBanner)

@@ -6,7 +6,7 @@ import hashlib
 class createAccountWindowTwo:
 	""" Insert to the Main window of the application
 	This class provide the second part of the Creating account page structure
-	- IS
+	- ID
 	- Password
 	- Confirm password """
 
