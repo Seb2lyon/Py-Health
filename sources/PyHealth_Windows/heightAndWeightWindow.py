@@ -2,7 +2,6 @@ from tkinter import *
 import time
 import pickle
 
-
 class heightAndWeightWindow:
 	""" Insert to the Main window of the application
 	This class display the form to fill the user's : 
@@ -26,6 +25,7 @@ class heightAndWeightWindow:
 		self.labelHeight['fg'] = "#993300"
 
 		self.entryHeight = Entry(self.mainPage.application, textvariable=self.varHeight, width=5, font=self.mainPage.normalInputFont)
+		self.entryHeight.bind('<KeyRelease>', self.jumpToWeight)
 
 		self.labelCentimeters = Label(self.mainPage.application, text="centimètres", font=self.mainPage.largeFont)
 		self.labelCentimeters['bg'] = "#E4E4E4"
@@ -36,6 +36,7 @@ class heightAndWeightWindow:
 		self.labelWeight['fg'] = "#993300"
 
 		self.entryWeight = Entry(self.mainPage.application, textvariable=self.varWeight, width=5, font=self.mainPage.normalInputFont)
+		self.entryWeight.bind('<KeyRelease>', self.jumpToCalculate)
 
 		self.labelKilograms = Label(self.mainPage.application, text="kilogrammes", font=self.mainPage.largeFont)
 		self.labelKilograms['bg'] = "#E4E4E4"
@@ -64,6 +65,16 @@ class heightAndWeightWindow:
 	def pressReturn(self, event):
 		""" Manage the action when user press the key Enter """
 		self.calculateBMI()
+
+	def jumpToWeight(self, event):
+		""" Automatic jump to the Weight aera when user enter 3 inputs """ 
+		if len(self.entryHeight.get()) == 3:
+			self.entryWeight.focus()
+
+	def jumpToCalculate(self, event):
+		""" Automatic jump to the Calculate button when user enter 5 inputs """ 
+		if len(self.entryWeight.get()) == 5:
+			self.buttonCalculate.focus()
 
 	def calculateBMI(self):
 		""" Calculate BMI and update profile """
@@ -136,6 +147,4 @@ class heightAndWeightWindow:
 					i = i + 1
 				file.close()
 
-
-		# TODO : limit imputs(Height : 3 - Weight : 5)
-		# TODO : Go to Result page
+				self.mainPage.changeHeightAndWeightToResults()

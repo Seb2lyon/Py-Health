@@ -5,6 +5,7 @@ from PyHealth_Windows.createAccountWindowOne import *
 from PyHealth_Windows.createAccountWindowTwo import *
 from PyHealth_Windows.summaryWindow import *
 from PyHealth_Windows.heightAndWeightWindow import *
+from PyHealth_Windows.resultsWindow import *
 
 class mainWindow(Frame):
 	""" Main window : manager of the application
@@ -167,6 +168,14 @@ class mainWindow(Frame):
 		self.delSummaryWindow()
 		self.heightAndWeight = heightAndWeightWindow(self) 
 
+	def changeHeightAndWeightToResults(self):
+		""" Function that permit to jump from
+		Height and Weight window
+		to
+		the Results page """
+		self.delHeightAndWeightWindow()
+		self.results = resultsWindow(self)
+
 	def delWelcomeWindow(self):
 		""" Destroy Welcome window """
 		self.welcome.subTitle.destroy()
@@ -228,3 +237,15 @@ class mainWindow(Frame):
 		self.summary.buttonConfirm.destroy()
 		self.summary.labelDeleteAccount.destroy()
 		del self.summary
+
+	def delHeightAndWeightWindow(self):
+		""" Destroy Height and Weight window """
+		self.heightAndWeight.labelHeight.destroy()
+		self.heightAndWeight.entryHeight.destroy()
+		self.heightAndWeight.labelCentimeters.destroy()
+		self.heightAndWeight.labelWeight.destroy()
+		self.heightAndWeight.entryWeight.destroy()
+		self.heightAndWeight.labelKilograms.destroy()
+		self.heightAndWeight.labelWarningConnexion.destroy()
+		self.heightAndWeight.buttonCalculate.destroy()
+		del self.heightAndWeight
