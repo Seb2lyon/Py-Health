@@ -54,6 +54,11 @@ class resultsWindow:
 		self.labelNormalWeight5['bg'] = "#E3FBFA"
 		self.labelNormalWeight5['fg'] = "#000000"
 
+		self.labelShowHistory = Label(self.mainPage.application, text="Consultez votre historique", font=self.mainPage.normalLinkFont, cursor="hand2")
+		self.labelShowHistory['bg'] = "#E3FBFA"
+		self.labelShowHistory['fg'] = "#8000FF"
+	
+
 		self.labelBMI1.place(x=35, y=126)
 		self.labelBMI2.place(x=200, y=126)
 		self.labelResult.place(x=startPoint1, y=185)
@@ -62,6 +67,7 @@ class resultsWindow:
 		self.labelNormalWeight3.place(x=95, y=276)
 		self.labelNormalWeight4.place(x=125, y=276)
 		self.labelNormalWeight5.place(x=185, y=276)
+		self.labelShowHistory.place(x=136, y=330)
 
 
 	def pressReturn(self, event):
