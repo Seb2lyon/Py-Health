@@ -29,6 +29,7 @@ class mainWindow(Frame):
 		self.normalLinkFont = Font(family="Arial Black", size=11, underline=1)
 		self.normalInputFont = Font(family="Arial", size=11)
 		self.largeFont = Font(family="Arial Black", size=12)
+		self.xlargeFont = Font(family="Arial Black", size=15)
 
 		self.currentUser = userClass()
 		self.currentBMI = 0
