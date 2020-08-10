@@ -24,25 +24,25 @@ class createAccountWindowTwo:
 		self.varPasswd2.set("")
 
 		self.labelPseudo = Label(self.mainPage.application, text="Votre identifiant :", font=self.mainPage.largeFont)
-		self.labelPseudo['bg'] = "#E4E4E4"
-		self.labelPseudo['fg'] = "#993300"
+		self.labelPseudo['bg'] = "#E3FBFA"
+		self.labelPseudo['fg'] = "#8000FF"
 
 		self.entryPseudo = Entry(self.mainPage.application, textvariable=self.varPseudo, width=55, font=self.mainPage.normalInputFont)
 
 		self.labelPasswd1 = Label(self.mainPage.application, text="Votre mot de passe :", font=self.mainPage.largeFont)
-		self.labelPasswd1['bg'] = "#E4E4E4"
-		self.labelPasswd1['fg'] = "#993300"
+		self.labelPasswd1['bg'] = "#E3FBFA"
+		self.labelPasswd1['fg'] = "#8000FF"
 
 		self.entryPasswd1 = Entry(self.mainPage.application, textvariable=self.varPasswd1, width=55, font=self.mainPage.normalInputFont, show="*")
 
 		self.labelPasswd2 = Label(self.mainPage.application, text="Confirmez votre mot de passe :", font=self.mainPage.largeFont)
-		self.labelPasswd2['bg'] = "#E4E4E4"
-		self.labelPasswd2['fg'] = "#993300"
+		self.labelPasswd2['bg'] = "#E3FBFA"
+		self.labelPasswd2['fg'] = "#8000FF"
 
 		self.entryPasswd2 = Entry(self.mainPage.application, textvariable=self.varPasswd2, width=55, font=self.mainPage.normalInputFont, show="*")
 
 		self.labelWarningConnexion = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
-		self.labelWarningConnexion['bg'] = "#E4E4E4"
+		self.labelWarningConnexion['bg'] = "#E3FBFA"
 		self.labelWarningConnexion['fg'] = "#FF0000"
 
 		self.buttonPrevious = Button(self.mainPage.application, text="Précédent", font=self.mainPage.normalFont, width=10, command=self.goBackPageOne)
@@ -100,31 +100,31 @@ class createAccountWindowTwo:
 
 		if self.varPseudo.get() == '':
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Veuillez renseigner un identifiant", font=self.mainPage.largeFont)
-			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['bg'] = "#E3FBFA"
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=360)
 			self.entryPseudo.focus()
 		elif self.pseudoExist == True and self.mainPage.currentUser.userExist == False:
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Cet identifiant est déjà pris.", font=self.mainPage.largeFont)
-			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['bg'] = "#E3FBFA"
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=360)
 			self.entryPseudo.focus()
 		elif self.varPasswd1.get() == '':
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Veuillez renseigner un mot de passe", font=self.mainPage.largeFont)
-			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['bg'] = "#E3FBFA"
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=360)
 			self.entryPasswd1.focus()
 		elif self.varPasswd2.get() == '':
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Veuillez confirmer votre mot de passe", font=self.mainPage.largeFont)
-			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['bg'] = "#E3FBFA"
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=360)
 			self.entryPasswd2.focus()
 		elif self.varPasswd1.get() != self.varPasswd2.get():
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Mot de passe différent", font=self.mainPage.largeFont)
-			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['bg'] = "#E3FBFA"
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=360)
 			self.entryPasswd1.focus()

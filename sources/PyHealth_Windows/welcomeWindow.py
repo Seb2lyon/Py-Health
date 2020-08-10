@@ -23,17 +23,17 @@ class welcomeWindow:
 		self.subTitle = Label(self.mainPage.application, height=36, image=self.imgSubTitle)
 
 		self.labelConnect = Label(self.mainPage.application, text="Connectez-vous à votre compte :", font=self.mainPage.largeFont)
-		self.labelConnect['bg'] = "#E4E4E4"
-		self.labelConnect['fg'] = "#993300"
+		self.labelConnect['bg'] = "#E3FBFA"
+		self.labelConnect['fg'] = "#8000FF"
 
 		self.labelID = Label(self.mainPage.application, text="Identifiant :", font=self.mainPage.normalFont)
-		self.labelID['bg'] = "#E4E4E4"
+		self.labelID['bg'] = "#E3FBFA"
 		self.labelID['fg'] = "#000000"
 
 		self.entryID = Entry(self.mainPage.application, textvariable=self.varID, width=55, font=self.mainPage.normalInputFont)
 
 		self.labelPass = Label(self.mainPage.application, text="Mot de passe :", font=self.mainPage.normalFont)
-		self.labelPass['bg'] = "#E4E4E4"
+		self.labelPass['bg'] = "#E3FBFA"
 		self.labelPass['fg'] = "#000000"
 
 		self.entryPass = Entry(self.mainPage.application, textvariable=self.varPass, width=55, font=self.mainPage.normalInputFont, show="*")
@@ -42,16 +42,16 @@ class welcomeWindow:
 		self.buttonConnect['bg'] = "#969696"
 		self.buttonConnect['fg'] = "#FFFFFF"
 		self.labelWarningConnexion = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
-		self.labelWarningConnexion['bg'] = "#E4E4E4"
+		self.labelWarningConnexion['bg'] = "#E3FBFA"
 		self.labelWarningConnexion['fg'] = "#FF0000"
 
 		self.labelNoAccount = Label(self.mainPage.application, text="Vous n'avez pas de compte ?", font=self.mainPage.normalItalicFont)
-		self.labelNoAccount['bg'] = "#E4E4E4"
+		self.labelNoAccount['bg'] = "#E3FBFA"
 		self.labelNoAccount['fg'] = "#000000"
 
 		self.labelCreateAccount = Label(self.mainPage.application, text="Créez-le simplement", font=self.mainPage.normalLinkFont, cursor="hand2")
-		self.labelCreateAccount['bg'] = "#E4E4E4"
-		self.labelCreateAccount['fg'] = "#993300"
+		self.labelCreateAccount['bg'] = "#E3FBFA"
+		self.labelCreateAccount['fg'] = "#8000FF"
 		self.labelCreateAccount.bind("<Button-1>", lambda e: self.mainPage.changeMainToCreateAccountOne())	
 
 		self.subTitle.place(x=0, y=106)
@@ -80,14 +80,14 @@ class welcomeWindow:
 
 		if self.entryID.get() == "":
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Identifiant obligatoire", font=self.mainPage.largeFont)
-			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['bg'] = "#E3FBFA"
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=30, y=380)
 			self.entryID.focus()
 
 		elif self.entryPass.get() == "":
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Mot de passe obligatoire", font=self.mainPage.largeFont)
-			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['bg'] = "#E3FBFA"
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=30, y=380)
 			self.entryPass.focus()
@@ -126,7 +126,7 @@ class welcomeWindow:
 				self.mainPage.changeMainToSummary()	
 			else:
 				self.labelWarningConnexion = Label(self.mainPage.application, text="Identifiant et/ou mot de passe incorrect", font=self.mainPage.largeFont)
-				self.labelWarningConnexion['bg'] = "#E4E4E4"
+				self.labelWarningConnexion['bg'] = "#E3FBFA"
 				self.labelWarningConnexion['fg'] = "#FF0000"
 				self.labelWarningConnexion.place(x=30, y=380)
 				self.entryID.focus()

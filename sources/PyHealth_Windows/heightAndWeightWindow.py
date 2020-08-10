@@ -21,33 +21,33 @@ class heightAndWeightWindow:
 		self.varWeight.set('')
 
 		self.labelHeight = Label(self.mainPage.application, text="Quelle est votre taille ?", font=self.mainPage.largeFont)
-		self.labelHeight['bg'] = "#E4E4E4"
-		self.labelHeight['fg'] = "#993300"
+		self.labelHeight['bg'] = "#E3FBFA"
+		self.labelHeight['fg'] = "#8000FF"
 
 		self.entryHeight = Entry(self.mainPage.application, textvariable=self.varHeight, width=5, font=self.mainPage.normalInputFont)
 		self.entryHeight.bind('<KeyRelease>', self.jumpToWeight)
 
 		self.labelCentimeters = Label(self.mainPage.application, text="centimètres", font=self.mainPage.largeFont)
-		self.labelCentimeters['bg'] = "#E4E4E4"
+		self.labelCentimeters['bg'] = "#E3FBFA"
 		self.labelCentimeters['fg'] = "#000000"
 
 		self.labelWeight = Label(self.mainPage.application, text="Quel est votre poids ?", font=self.mainPage.largeFont)
-		self.labelWeight['bg'] = "#E4E4E4"
-		self.labelWeight['fg'] = "#993300"
+		self.labelWeight['bg'] = "#E3FBFA"
+		self.labelWeight['fg'] = "#8000FF"
 
 		self.entryWeight = Entry(self.mainPage.application, textvariable=self.varWeight, width=5, font=self.mainPage.normalInputFont)
 		self.entryWeight.bind('<KeyRelease>', self.jumpToCalculate)
 
 		self.labelKilograms = Label(self.mainPage.application, text="kilogrammes", font=self.mainPage.largeFont)
-		self.labelKilograms['bg'] = "#E4E4E4"
+		self.labelKilograms['bg'] = "#E3FBFA"
 		self.labelKilograms['fg'] = "#000000"
 
 		self.labelWarningConnexion = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
-		self.labelWarningConnexion['bg'] = "#E4E4E4"
+		self.labelWarningConnexion['bg'] = "#E3FBFA"
 		self.labelWarningConnexion['fg'] = "#FF0000"
 
 		self.buttonCalculate = Button(self.mainPage.application, text="Calculez votre IMC", font=self.mainPage.largeFont, width=30, command=self.calculateBMI)
-		self.buttonCalculate['bg'] = "#008000"
+		self.buttonCalculate['bg'] = "#3366FF"
 		self.buttonCalculate['fg'] = "#FFFFFF"
 
 
@@ -94,7 +94,7 @@ class heightAndWeightWindow:
 		
 		if errorInputs == True:
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Erreur sur votre taille (en centimètres)", font=self.mainPage.largeFont)
-			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['bg'] = "#E3FBFA"
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=35, y=310)
 			self.entryHeight.focus()
@@ -111,7 +111,7 @@ class heightAndWeightWindow:
 
 			if errorInputs == True:
 				self.labelWarningConnexion = Label(self.mainPage.application, text="Erreur sur votre poids (en kilogrammes)", font=self.mainPage.largeFont)
-				self.labelWarningConnexion['bg'] = "#E4E4E4"
+				self.labelWarningConnexion['bg'] = "#E3FBFA"
 				self.labelWarningConnexion['fg'] = "#FF0000"
 				self.labelWarningConnexion.place(x=35, y=310)
 				self.entryWeight.focus()

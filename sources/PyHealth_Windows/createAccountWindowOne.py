@@ -20,14 +20,14 @@ class createAccountWindowOne:
 		self.varFirstName.set(self.mainPage.currentUser.userFirstName)
 
 		self.labelFirstName = Label(self.mainPage.application, text="Votre prénom :", font=self.mainPage.largeFont)
-		self.labelFirstName['bg'] = "#E4E4E4"
-		self.labelFirstName['fg'] = "#993300"
+		self.labelFirstName['bg'] = "#E3FBFA"
+		self.labelFirstName['fg'] = "#8000FF"
 
 		self.entryFirstName = Entry(self.mainPage.application, textvariable=self.varFirstName, width=55, font=self.mainPage.normalInputFont)
 
 		self.labelGender = Label(self.mainPage.application, text="Vous êtes :", font=self.mainPage.largeFont)
-		self.labelGender['bg'] = "#E4E4E4"
-		self.labelGender['fg'] = "#993300"
+		self.labelGender['bg'] = "#E3FBFA"
+		self.labelGender['fg'] = "#8000FF"
 
 		gender = ['une femme', 'un homme']
 		valGender = ['F', 'H']
@@ -39,15 +39,15 @@ class createAccountWindowOne:
 
 		for i in range(2):
 			self.radioGender = Radiobutton(self.mainPage.application, variable=self.varGender, text=gender[i], value=valGender[i], font=self.mainPage.largeFont)
-			self.radioGender['bg'] = "#E4E4E4"
+			self.radioGender['bg'] = "#E3FBFA"
 			self.radioGender['fg'] = "#000000"
 			self.radioGender.place(x=140, y=j)
 			self.radioStock.append(self.radioGender)
 			j = j + 33
 
 		self.labelBirthDate = Label(self.mainPage.application, text="Votre date de naissance :", font=self.mainPage.largeFont)
-		self.labelBirthDate['bg'] = "#E4E4E4"
-		self.labelBirthDate['fg'] = "#993300"
+		self.labelBirthDate['bg'] = "#E3FBFA"
+		self.labelBirthDate['fg'] = "#8000FF"
 
 		self.varBirthDay = IntVar()
 		self.varBirthMonth = IntVar()
@@ -74,7 +74,7 @@ class createAccountWindowOne:
 		self.entryBirthDay.bind('<KeyRelease>', self.jumpToMonth)
 
 		self.labelSlash1 = Label(self.mainPage.application, text=" / ", font=self.mainPage.normalFont)
-		self.labelSlash1['bg'] = "#E4E4E4"
+		self.labelSlash1['bg'] = "#E3FBFA"
 		self.labelSlash1['fg'] = "#000000"
 
 		self.entryBirthMonth = Entry(self.mainPage.application, textvariable=self.varBirthMonth, width=3, font=self.mainPage.normalInputFont)
@@ -93,7 +93,7 @@ class createAccountWindowOne:
 		self.entryBirthMonth.bind('<KeyRelease>', self.jumpToYear)
 
 		self.labelSlash2 = Label(self.mainPage.application, text=" / ", font=self.mainPage.normalFont)
-		self.labelSlash2['bg'] = "#E4E4E4"
+		self.labelSlash2['bg'] = "#E3FBFA"
 		self.labelSlash2['fg'] = "#000000"
 
 		self.entryBirthYear = Entry(self.mainPage.application, textvariable=self.varBirthYear, width=5, font=self.mainPage.normalInputFont)
@@ -108,7 +108,7 @@ class createAccountWindowOne:
 		self.entryBirthYear.bind('<KeyRelease>', self.jumpToNextButton)
 
 		self.labelWarningConnexion = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
-		self.labelWarningConnexion['bg'] = "#E4E4E4"
+		self.labelWarningConnexion['bg'] = "#E3FBFA"
 		self.labelWarningConnexion['fg'] = "#FF0000"
 
 		self.buttonCancel = Button(self.mainPage.application, text="Annuler", font=self.mainPage.normalFont, width=10, command=self.cancelCreateAccount)
@@ -214,7 +214,7 @@ class createAccountWindowOne:
 
 		if self.varFirstName.get() == "":
 			self.labelWarningConnexion = Label(self.mainPage.application, text="Veuillez renseigner votre prénom", font=self.mainPage.largeFont)
-			self.labelWarningConnexion['bg'] = "#E4E4E4"
+			self.labelWarningConnexion['bg'] = "#E3FBFA"
 			self.labelWarningConnexion['fg'] = "#FF0000"
 			self.labelWarningConnexion.place(x=25, y=365)
 			self.entryFirstName.focus()
@@ -292,7 +292,7 @@ class createAccountWindowOne:
 
 			if warningConnexion:
 				self.labelWarningConnexion = Label(self.mainPage.application, text="Date de naissance incorrecte", font=self.mainPage.largeFont)
-				self.labelWarningConnexion['bg'] = "#E4E4E4"
+				self.labelWarningConnexion['bg'] = "#E3FBFA"
 				self.labelWarningConnexion['fg'] = "#FF0000"
 				self.labelWarningConnexion.place(x=25, y=365)
 				try:

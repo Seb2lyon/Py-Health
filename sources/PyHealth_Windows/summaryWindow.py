@@ -19,24 +19,24 @@ class summaryWindow:
 		welcomeString = "Bienvenue " + self.mainPage.currentUser.userFirstName + ","
 
 		self.labelCheck1 = Label(self.mainPage.application, text=welcomeString, font=self.mainPage.largeFont)
-		self.labelCheck1['bg'] = "#E4E4E4"
+		self.labelCheck1['bg'] = "#E3FBFA"
 		self.labelCheck1['fg'] = "#000000"
 
 		self.labelCheck2 = Label(self.mainPage.application, text="Merci de bien vouloir confirmer vos informations", font=self.mainPage.largeFont)
-		self.labelCheck2['bg'] = "#E4E4E4"
+		self.labelCheck2['bg'] = "#E3FBFA"
 		self.labelCheck2['fg'] = "#000000"
 
 		self.labelCheck3 = Label(self.mainPage.application, text="personnelles : ", font=self.mainPage.largeFont)
-		self.labelCheck3['bg'] = "#E4E4E4"
+		self.labelCheck3['bg'] = "#E3FBFA"
 		self.labelCheck3['fg'] = "#000000"
 
 		self.labelFirstName1 = Label(self.mainPage.application, text="Votre prénom est ", font=self.mainPage.largeFont)
-		self.labelFirstName1['bg'] = "#E4E4E4"
-		self.labelFirstName1['fg'] = "#993300"
+		self.labelFirstName1['bg'] = "#E3FBFA"
+		self.labelFirstName1['fg'] = "#8000FF"
 
 		self.labelFirstName2 = Label(self.mainPage.application, text=self.mainPage.currentUser.userFirstName, font=self.mainPage.largeFont)
-		self.labelFirstName2['bg'] = "#E4E4E4"
-		self.labelFirstName2['fg'] = "#008000"
+		self.labelFirstName2['bg'] = "#E3FBFA"
+		self.labelFirstName2['fg'] = "#3366FF"
 
 		birthDay = ""
 		birthMonth = ""
@@ -68,14 +68,14 @@ class summaryWindow:
 			self.labelGender2.place(x=155, y= 266)
 			self.labelBirthDate2.place(x=176, y=297)
 
-		self.labelGender1['bg'] = "#E4E4E4"
-		self.labelGender1['fg'] = "#993300"	
-		self.labelGender2['bg'] = "#E4E4E4"
-		self.labelGender2['fg'] = "#008000"
-		self.labelBirthDate1['bg'] = "#E4E4E4"
-		self.labelBirthDate1['fg'] = "#993300"	
-		self.labelBirthDate2['bg'] = "#E4E4E4"
-		self.labelBirthDate2['fg'] = "#008000"
+		self.labelGender1['bg'] = "#E3FBFA"
+		self.labelGender1['fg'] = "#8000FF"	
+		self.labelGender2['bg'] = "#E3FBFA"
+		self.labelGender2['fg'] = "#3366FF"
+		self.labelBirthDate1['bg'] = "#E3FBFA"
+		self.labelBirthDate1['fg'] = "#8000FF"	
+		self.labelBirthDate2['bg'] = "#E3FBFA"
+		self.labelBirthDate2['fg'] = "#3366FF"
 
 		self.buttonModify = Button(self.mainPage.application, text="Modifiez", font=self.mainPage.normalFont, width=10, command=self.modifyProfile)
 		self.buttonModify['bg'] = "#969696"
@@ -86,7 +86,7 @@ class summaryWindow:
 		self.buttonConfirm['fg'] = "#FFFFFF"
 
 		self.labelDeleteAccount = Label(self.mainPage.application, text="Supprimez votre compte", font=self.mainPage.normalLinkFont, cursor="hand2")
-		self.labelDeleteAccount['bg'] = "#E4E4E4"
+		self.labelDeleteAccount['bg'] = "#E3FBFA"
 		self.labelDeleteAccount['fg'] = "#000000"
 		self.labelDeleteAccount.bind("<Button-1>", lambda e: self.deleteAccountProcess())	
 

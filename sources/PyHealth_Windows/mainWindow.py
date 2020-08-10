@@ -20,7 +20,7 @@ class mainWindow(Frame):
 		self.application.iconphoto(True, PhotoImage(file="images/icon.png"))
 		self.application.geometry("500x500")
 		self.application.resizable(False, False)
-		self.application['bg'] = "#E4E4E4"
+		self.application['bg'] = "#E3FBFA"
 
 		self.smallFont = Font(family="Arial Black", size=10)
 		self.smallLinkFont = Font(family="Arial Black", size=10, underline=1)
@@ -38,12 +38,12 @@ class mainWindow(Frame):
 		self.banner = Label(self.application, height=106, image=self.imgBanner)
 
 		self.footer = Label(self.application, text="version 1.0 | 03/08/2020 - ", font=self.smallFont)
-		self.footer['bg'] = "#E4E4E4"
-		self.footer['fg'] = "#008000"
+		self.footer['bg'] = "#E3FBFA"
+		self.footer['fg'] = "#3366FF"
 
 		self.webURL = Label(self.application, text="Seb2lyon", font=self.smallLinkFont, cursor="hand2")
-		self.webURL['bg'] = "#E4E4E4"
-		self.webURL['fg'] = "#008000"
+		self.webURL['bg'] = "#E3FBFA"
+		self.webURL['fg'] = "#3366FF"
 		self.webURL.bind("<Button-1>", lambda e: self.goToUrl("http://seb2lyon.info.free.fr"))
 
 		self.banner.place(x=0, y=0)
