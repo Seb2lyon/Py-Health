@@ -149,9 +149,3 @@ class summaryWindow:
 	def validateProfile(self):
 		""" Continue to the Size and weight page """
 		self.mainPage.changeSummaryToHeightAndWeight()
-
-		
-
-		# TODO : Activate Return key -> validate button
-		# TODO : Validate button -> continue the app
-		

@@ -1,4 +1,5 @@
 from tkinter import *
+import time
 
 class resultsWindow:
 	""" Insert to the Main window of the application
@@ -14,6 +15,8 @@ class resultsWindow:
 		self.mainPage = page
 
 		self.mainPage.application.bind('<KeyRelease-Return>', self.pressReturn)
+
+		self.userAge = self.userAgeControl()
 
 		self.labelBMI1 = Label(self.mainPage.application, text="Votre IMC est de :", font=self.mainPage.largeFont)
 		self.labelBMI1['bg'] = "#E4E4E4"
@@ -44,35 +47,61 @@ class resultsWindow:
 		""" Control the user state regarding his BMI, his sex and age (for children) """
 		userState = ""
 		stateColor = ""
-		# ONLY FOR ADULTS
-		if self.mainPage.currentBMI < 16.5:
-			userState = "Vous êtes en état de dénutrition"
-			stateColor = "#0000FF"
-			return userState, stateColor
-		elif self.mainPage.currentBMI >= 16.5 and self.mainPage.currentBMI < 18.5:
-			userState = "Vous êtes en état de maigreur"
-			stateColor = "#0000FF"
-			return userState, stateColor
-		elif self.mainPage.currentBMI >= 18.5 and self.mainPage.currentBMI < 25:
-			userState = "Vous avez une corpulence normale"
-			stateColor = "#01CA02"
-			return userState, stateColor
-		elif self.mainPage.currentBMI >= 25 and self.mainPage.currentBMI < 30:
-			userState = "Vous êtes en surpoids"
-			stateColor = "#FF6600"
-			return userState, stateColor
-		elif self.mainPage.currentBMI >= 30 and self.mainPage.currentBMI < 35:
-			userState = "Vous êtes en état d'obésité modérée"
-			stateColor = "#FF0000"
-			return userState, stateColor
-		elif self.mainPage.currentBMI >= 35 and self.mainPage.currentBMI < 40:
-			userState = "Vous êtes en état d'obésité sévère"
-			stateColor = "#FF0000"
-			return userState, stateColor
-		elif self.mainPage.currentBMI >= 40:
-			userState = "Vous êtes en état d'obésité massive"
-			stateColor = "#FF0000"
-			return userState, stateColor
+
+		if self.userAge >= 18:
+			if self.mainPage.currentBMI < 16.5:
+				userState = "Vous êtes en état de dénutrition"
+				stateColor = "#0000FF"
+				return userState, stateColor
+			elif self.mainPage.currentBMI >= 16.5 and self.mainPage.currentBMI < 18.5:
+				userState = "Vous êtes en état de maigreur"
+				stateColor = "#0000FF"
+				return userState, stateColor
+			elif self.mainPage.currentBMI >= 18.5 and self.mainPage.currentBMI < 25:
+				userState = "Vous avez une corpulence normale"
+				stateColor = "#01CA02"
+				return userState, stateColor
+			elif self.mainPage.currentBMI >= 25 and self.mainPage.currentBMI < 30:
+				userState = "Vous êtes en surpoids"
+				stateColor = "#FF6600"
+				return userState, stateColor
+			elif self.mainPage.currentBMI >= 30 and self.mainPage.currentBMI < 35:
+				userState = "Vous êtes en état d'obésité modérée"
+				stateColor = "#FF0000"
+				return userState, stateColor
+			elif self.mainPage.currentBMI >= 35 and self.mainPage.currentBMI < 40:
+				userState = "Vous êtes en état d'obésité sévère"
+				stateColor = "#FF0000"
+				return userState, stateColor
+			elif self.mainPage.currentBMI >= 40:
+				userState = "Vous êtes en état d'obésité massive"
+				stateColor = "#FF0000"
+				return userState, stateColor
+		else:
+			if self.mainPage.currentUser.userGender == "H":
+				# Manage the boy status
+				pass
+			else:
+				# Manage the girl status
+				pass
+				
+	def userAgeControl(self):
+		""" Control the actual age of the user """
+		if self.mainPage.currentUser.userYearOfBirth == int(time.strftime('%Y')):
+			userAgeCalculate = 0
+		else:
+			if self.mainPage.currentUser.userMonthOfBirth < int(time.strftime('%m')):
+				userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth
+			elif self.mainPage.currentUser.userMonthOfBirth > int(time.strftime('%m')):
+				userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth - 1
+			else:
+				if self.mainPage.currentUser.userDayOfBirth <= int(time.strftime('%d')):
+					userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth
+				else:
+					userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth - 1
+
+		return userAgeCalculate
+
 
 		# ADD CHILDREN CONTROL
 
