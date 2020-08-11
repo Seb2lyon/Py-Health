@@ -10,7 +10,8 @@ class userClass:
 	- Height
 	- Weight
 	- Historic of BMI (results)
-	- Historic of BMI (dates) """
+	- Historic of BMI (dates)
+	- Historic of coordinate points (for graph display) """
 
 	def __init__(self):
 
@@ -25,4 +26,5 @@ class userClass:
 		self.userHeight = ""
 		self.userWeight = ""
 		self.userBMI = [] 
-		self.lastVisits = [] 
+		self.lastVisits = []
+		self.coordinatePoints = [] 

@@ -1,6 +1,7 @@
 from tkinter import *
 import time
 from tkinter.messagebox import *
+import pickle
 
 class resultsWindow:
 	""" Insert to the Main window of the application
@@ -80,6 +81,23 @@ class resultsWindow:
 		""" Manage the action when user press the key Enter """
 		pass
 
+	def userAgeControl(self):
+		""" Control the actual age of the user """
+		if self.mainPage.currentUser.userYearOfBirth == int(time.strftime('%Y')):
+			userAgeCalculate = 0
+		else:
+			if self.mainPage.currentUser.userMonthOfBirth < int(time.strftime('%m')):
+				userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth
+			elif self.mainPage.currentUser.userMonthOfBirth > int(time.strftime('%m')):
+				userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth - 1
+			else:
+				if self.mainPage.currentUser.userDayOfBirth <= int(time.strftime('%d')):
+					userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth
+				else:
+					userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth - 1
+
+		return userAgeCalculate
+
 	def userStateControl(self):
 		""" Control the user state regarding his BMI, his sex and age (for children) """
 		userState = ""
@@ -89,24 +107,31 @@ class resultsWindow:
 			if self.mainPage.currentBMI < 16.5:
 				userState = "Vous êtes en état de dénutrition"
 				stateColor = "#0000FF"
+				self.createGraphPoints(0.0, 16.5, stateColor)
 			elif self.mainPage.currentBMI >= 16.5 and self.mainPage.currentBMI < 18.5:
 				userState = "Vous êtes en état de maigreur"
 				stateColor = "#0000FF"
+				self.createGraphPoints(16.5, 18.5, stateColor)
 			elif self.mainPage.currentBMI >= 18.5 and self.mainPage.currentBMI < 25:
 				userState = "Vous avez une corpulence normale"
 				stateColor = "#01CA02"
+				self.createGraphPoints(18.5, 25.0, stateColor)
 			elif self.mainPage.currentBMI >= 25 and self.mainPage.currentBMI < 30:
 				userState = "Vous êtes en surpoids"
 				stateColor = "#FF6600"
+				self.createGraphPoints(25.0, 30.0, stateColor)
 			elif self.mainPage.currentBMI >= 30 and self.mainPage.currentBMI < 35:
 				userState = "Vous êtes en état d'obésité modérée"
 				stateColor = "#FF0000"
+				self.createGraphPoints(30.0, 35.0, stateColor)
 			elif self.mainPage.currentBMI >= 35 and self.mainPage.currentBMI < 40:
 				userState = "Vous êtes en état d'obésité sévère"
 				stateColor = "#FF0000"
+				self.createGraphPoints(35.0, 40.0, stateColor)
 			elif self.mainPage.currentBMI >= 40:
 				userState = "Vous êtes en état d'obésité massive"
 				stateColor = "#FF0000"
+				self.createGraphPoints(40.0, 50.0, stateColor)
 
 			minNormalWeight = 18.5 * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
 			maxNormalWeight = 25 * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
@@ -257,15 +282,19 @@ class resultsWindow:
 				if self.mainPage.currentBMI >= boyBMI[self.userAge, 'minLow'] and self.mainPage.currentBMI < boyBMI[self.userAge, 'maxLow']:
 					userState = "Vous êtes en insuffisance pondérale"
 					stateColor = "#0000FF"
+					self.createGraphPoints(boyBMI[self.userAge, 'minLow'], boyBMI[self.userAge, 'maxLow'], stateColor)
 				elif self.mainPage.currentBMI >= boyBMI[self.userAge, 'minNormal'] and self.mainPage.currentBMI < boyBMI[self.userAge, 'maxNormal']:
 					userState = "Vous avez une corpulence normale"
 					stateColor = "#01CA02"
+					self.createGraphPoints(boyBMI[self.userAge, 'minNormal'], boyBMI[self.userAge, 'maxNormal'], stateColor)
 				elif self.mainPage.currentBMI >= boyBMI[self.userAge, 'minHigh'] and self.mainPage.currentBMI < boyBMI[self.userAge, 'maxHigh']:
 					userState = "Vous êtes en surpoids"
 					stateColor = "#FF6600"
+					self.createGraphPoints(boyBMI[self.userAge, 'minHigh'], boyBMI[self.userAge, 'maxHigh'], stateColor)
 				elif self.mainPage.currentBMI >= boyBMI[self.userAge, 'minXHigh'] and self.mainPage.currentBMI < boyBMI[self.userAge, 'maxXHigh']:
 					userState = "Vous êtes en état d'obésité"
 					stateColor = "#FF0000"
+					self.createGraphPoints(boyBMI[self.userAge, 'minXHigh'], boyBMI[self.userAge, 'maxXHigh'], stateColor)
 
 				minNormalWeight = boyBMI[self.userAge, 'minNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
 				maxNormalWeight = boyBMI[self.userAge, 'maxNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
@@ -414,41 +443,81 @@ class resultsWindow:
 				if self.mainPage.currentBMI >= girlBMI[self.userAge, 'minLow'] and self.mainPage.currentBMI < girlBMI[self.userAge, 'maxLow']:
 					userState = "Vous êtes en insuffisance pondérale"
 					stateColor = "#0000FF"
+					self.createGraphPoints(girlBMI[self.userAge, 'minLow'], girlBMI[self.userAge, 'maxLow'], stateColor)
 				elif self.mainPage.currentBMI >= girlBMI[self.userAge, 'minNormal'] and self.mainPage.currentBMI < girlBMI[self.userAge, 'maxNormal']:
 					userState = "Vous avez une corpulence normale"
 					stateColor = "#01CA02"
+					self.createGraphPoints(girlBMI[self.userAge, 'minNormal'], girlBMI[self.userAge, 'maxNormal'], stateColor)
 				elif self.mainPage.currentBMI >= girlBMI[self.userAge, 'minHigh'] and self.mainPage.currentBMI < girlBMI[self.userAge, 'maxHigh']:
 					userState = "Vous êtes en surpoids"
 					stateColor = "#FF6600"
+					self.createGraphPoints(girlBMI[self.userAge, 'minHigh'], girlBMI[self.userAge, 'maxHigh'], stateColor)
 				elif self.mainPage.currentBMI >= girlBMI[self.userAge, 'minXHigh'] and self.mainPage.currentBMI < girlBMI[self.userAge, 'maxXHigh']:
 					userState = "Vous êtes en état d'obésité"
 					stateColor = "#FF0000"
+					self.createGraphPoints(girlBMI[self.userAge, 'minXHigh'], girlBMI[self.userAge, 'maxXHigh'], stateColor)
 
 				minNormalWeight = girlBMI[self.userAge, 'minNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
 				maxNormalWeight = girlBMI[self.userAge, 'maxNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
 				return userState, stateColor, minNormalWeight, maxNormalWeight
-				
-	def userAgeControl(self):
-		""" Control the actual age of the user """
-		if self.mainPage.currentUser.userYearOfBirth == int(time.strftime('%Y')):
-			userAgeCalculate = 0
-		else:
-			if self.mainPage.currentUser.userMonthOfBirth < int(time.strftime('%m')):
-				userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth
-			elif self.mainPage.currentUser.userMonthOfBirth > int(time.strftime('%m')):
-				userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth - 1
-			else:
-				if self.mainPage.currentUser.userDayOfBirth <= int(time.strftime('%d')):
-					userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth
-				else:
-					userAgeCalculate = int(time.strftime('%Y')) - self.mainPage.currentUser.userYearOfBirth - 1
 
-		return userAgeCalculate
+	def createGraphPoints(self, minBMI, maxBMI, colorStatus):
+		""" Create the point coordinate for the history graph """
+		if colorStatus == "#0000FF":
+			minCoordinate = 180
+			maxCoordinate = 240
+		elif colorStatus == "#01CA02":
+			minCoordinate = 120
+			maxCoordinate = 180
+		elif colorStatus == "#FF6600":
+			minCoordinate = 60
+			maxCoordinate = 120
+		elif colorStatus == "#FF0000":
+			minCoordinate = 0
+			maxCoordinate = 60
+
+		BMIDelta = maxBMI - minBMI
+		BMIDev = self.mainPage.currentBMI - minBMI
+
+		percentBMI = (100 * BMIDev) / BMIDelta
+
+		graphDelta = maxCoordinate - minCoordinate
+
+		percentGraph = (graphDelta * percentBMI) / 100
+
+		coordinatePoint = maxCoordinate - percentGraph
+		coordinatePoint = int(coordinatePoint)
+
+		self.mainPage.currentUser.coordinatePoints.append(coordinatePoint)
 
 	def quitApp(self):
 		""" Close the app """
 		quitAnswer = askokcancel(title="Py Health - Quitter l'application", message="Souhaitez-vous réellement quitter l'application \"Py Health\" ?")
 		if quitAnswer == True:
+
+			file = open("PyHealth_User/users", "rb")
+			myUnplickler = pickle.Unpickler(file)
+			usersList = []
+			try:
+				while True:
+					usersList.append(myUnplickler.load())
+			except:
+				pass
+			file.close()
+
+			file = open("PyHealth_User/users", "wb")
+			myPickler = pickle.Pickler(file)
+			usersNumber = len(usersList)
+			i = 0
+			while i < usersNumber:
+				if usersList[i].userPseudo == self.mainPage.currentUser.userPseudo:
+					usersList[i] = self.mainPage.currentUser
+					myPickler.dump(usersList[i])
+				else:
+					myPickler.dump(usersList[i])
+				i = i + 1
+			file.close()
+	
 			self.mainPage.application.quit()
 
 

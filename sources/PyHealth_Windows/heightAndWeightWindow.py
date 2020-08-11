@@ -1,6 +1,5 @@
 from tkinter import *
 import time
-import pickle
 
 class heightAndWeightWindow:
 	""" Insert to the Main window of the application
@@ -123,28 +122,5 @@ class heightAndWeightWindow:
 				self.mainPage.currentUser.userWeight = controlWeight
 				self.mainPage.currentUser.userBMI.append(BMI)
 				self.mainPage.currentUser.lastVisits.append(currentTime)
-
-				file = open("PyHealth_User/users", "rb")
-				myUnplickler = pickle.Unpickler(file)
-				usersList = []
-				try:
-					while True:
-						usersList.append(myUnplickler.load())
-				except:
-					pass
-				file.close()
-
-				file = open("PyHealth_User/users", "wb")
-				myPickler = pickle.Pickler(file)
-				usersNumber = len(usersList)
-				i = 0
-				while i < usersNumber:
-					if usersList[i].userPseudo == self.mainPage.currentUser.userPseudo:
-						usersList[i] = self.mainPage.currentUser
-						myPickler.dump(usersList[i])
-					else:
-						myPickler.dump(usersList[i])
-					i = i + 1
-				file.close()
 
 				self.mainPage.changeHeightAndWeightToResults()
