@@ -1,5 +1,6 @@
 from tkinter import *
 import time
+from tkinter.messagebox import *
 
 class resultsWindow:
 	""" Insert to the Main window of the application
@@ -57,6 +58,10 @@ class resultsWindow:
 		self.labelShowHistory = Label(self.mainPage.application, text="Consultez votre historique", font=self.mainPage.normalLinkFont, cursor="hand2")
 		self.labelShowHistory['bg'] = "#E3FBFA"
 		self.labelShowHistory['fg'] = "#8000FF"
+
+		self.buttonQuit = Button(self.mainPage.application, text="Quitter", font=self.mainPage.normalFont, width=10, command=self.quitApp)
+		self.buttonQuit['bg'] = "#969696"
+		self.buttonQuit['fg'] = "#FFFFFF"
 	
 
 		self.labelBMI1.place(x=35, y=126)
@@ -68,6 +73,7 @@ class resultsWindow:
 		self.labelNormalWeight4.place(x=125, y=276)
 		self.labelNormalWeight5.place(x=185, y=276)
 		self.labelShowHistory.place(x=136, y=330)
+		self.buttonQuit.place(x=190, y=380)
 
 
 	def pressReturn(self, event):
@@ -283,128 +289,126 @@ class resultsWindow:
 				girlBMI[2, 'minHigh'] = 19.0
 				girlBMI[2, 'maxHigh'] = 19.75
 				girlBMI[2, 'minXHigh'] = 19.75
-
-
 				girlBMI[2, 'maxXHigh'] = 1000.0
 				girlBMI[3, 'minLow'] = 0.0
-				girlBMI[3, 'maxLow'] = 14.0
-				girlBMI[3, 'minNormal'] = 14.0 
+				girlBMI[3, 'maxLow'] = 13.75
+				girlBMI[3, 'minNormal'] = 13.75 
 				girlBMI[3, 'maxNormal'] = 18.5
 				girlBMI[3, 'minHigh'] = 18.5
 				girlBMI[3, 'maxHigh'] = 19.5
 				girlBMI[3, 'minXHigh'] = 19.5
 				girlBMI[3, 'maxXHigh'] = 1000.0
 				girlBMI[4, 'minLow'] = 0.0
-				girlBMI[4, 'maxLow'] = 13.75
-				girlBMI[4, 'minNormal'] = 13.75 
+				girlBMI[4, 'maxLow'] = 13.5
+				girlBMI[4, 'minNormal'] = 13.5 
 				girlBMI[4, 'maxNormal'] = 18.0
 				girlBMI[4, 'minHigh'] = 18.0
 				girlBMI[4, 'maxHigh'] = 19.25
 				girlBMI[4, 'minXHigh'] = 19.25
 				girlBMI[4, 'maxXHigh'] = 1000.0
 				girlBMI[5, 'minLow'] = 0.0
-				girlBMI[5, 'maxLow'] = 13.5
-				girlBMI[5, 'minNormal'] = 13.5 
-				girlBMI[5, 'maxNormal'] = 18.0
-				girlBMI[5, 'minHigh'] = 18.0
+				girlBMI[5, 'maxLow'] = 13.0
+				girlBMI[5, 'minNormal'] = 13.0 
+				girlBMI[5, 'maxNormal'] = 17.75
+				girlBMI[5, 'minHigh'] = 17.75
 				girlBMI[5, 'maxHigh'] = 19.25
 				girlBMI[5, 'minXHigh'] = 19.25
 				girlBMI[5, 'maxXHigh'] = 1000.0
 				girlBMI[6, 'minLow'] = 0.0
-				girlBMI[6, 'maxLow'] = 13.5
-				girlBMI[6, 'minNormal'] = 13.5 
-				girlBMI[6, 'maxNormal'] = 18.0
-				girlBMI[6, 'minHigh'] = 18.0
+				girlBMI[6, 'maxLow'] = 13.0
+				girlBMI[6, 'minNormal'] = 13.0 
+				girlBMI[6, 'maxNormal'] = 17.75
+				girlBMI[6, 'minHigh'] = 17.75
 				girlBMI[6, 'maxHigh'] = 19.75
 				girlBMI[6, 'minXHigh'] = 19.75
 				girlBMI[6, 'maxXHigh'] = 1000.0
 				girlBMI[7, 'minLow'] = 0.0
-				girlBMI[7, 'maxLow'] = 13.5
-				girlBMI[7, 'minNormal'] = 13.5 
-				girlBMI[7, 'maxNormal'] = 18.25
-				girlBMI[7, 'minHigh'] = 18.25
+				girlBMI[7, 'maxLow'] = 13.0
+				girlBMI[7, 'minNormal'] = 13.0 
+				girlBMI[7, 'maxNormal'] = 18.0
+				girlBMI[7, 'minHigh'] = 18.0
 				girlBMI[7, 'maxHigh'] = 20.5
 				girlBMI[7, 'minXHigh'] = 20.5
 				girlBMI[7, 'maxXHigh'] = 1000.0
 				girlBMI[8, 'minLow'] = 0.0
-				girlBMI[8, 'maxLow'] = 13.5
-				girlBMI[8, 'minNormal'] = 13.5 
-				girlBMI[8, 'maxNormal'] = 18.75
-				girlBMI[8, 'minHigh'] = 18.75
-				girlBMI[8, 'maxHigh'] = 21.5
-				girlBMI[8, 'minXHigh'] = 21.5
+				girlBMI[8, 'maxLow'] = 13.0
+				girlBMI[8, 'minNormal'] = 13.0 
+				girlBMI[8, 'maxNormal'] = 18.5
+				girlBMI[8, 'minHigh'] = 18.5
+				girlBMI[8, 'maxHigh'] = 21.75
+				girlBMI[8, 'minXHigh'] = 21.75
 				girlBMI[8, 'maxXHigh'] = 1000.0
 				girlBMI[9, 'minLow'] = 0.0
-				girlBMI[9, 'maxLow'] = 13.5
-				girlBMI[9, 'minNormal'] = 13.5 
-				girlBMI[9, 'maxNormal'] = 19.25
-				girlBMI[9, 'minHigh'] = 19.25
-				girlBMI[9, 'maxHigh'] = 22.75
-				girlBMI[9, 'minXHigh'] = 22.75
+				girlBMI[9, 'maxLow'] = 13.25
+				girlBMI[9, 'minNormal'] = 13.25 
+				girlBMI[9, 'maxNormal'] = 19.0
+				girlBMI[9, 'minHigh'] = 19.0
+				girlBMI[9, 'maxHigh'] = 23.0
+				girlBMI[9, 'minXHigh'] = 23.0
 				girlBMI[9, 'maxXHigh'] = 1000.0
 				girlBMI[10, 'minLow'] = 0.0
-				girlBMI[10, 'maxLow'] = 13.75
-				girlBMI[10, 'minNormal'] = 13.75 
+				girlBMI[10, 'maxLow'] = 13.5
+				girlBMI[10, 'minNormal'] = 13.5 
 				girlBMI[10, 'maxNormal'] = 20.0
 				girlBMI[10, 'minHigh'] = 20.0
-				girlBMI[10, 'maxHigh'] = 24.0
-				girlBMI[10, 'minXHigh'] = 24.0
+				girlBMI[10, 'maxHigh'] = 24.25
+				girlBMI[10, 'minXHigh'] = 24.25
 				girlBMI[10, 'maxXHigh'] = 1000.0
 				girlBMI[11, 'minLow'] = 0.0
-				girlBMI[11, 'maxLow'] = 14.0
-				girlBMI[11, 'minNormal'] = 14.0 
-				girlBMI[11, 'maxNormal'] = 20.5
-				girlBMI[11, 'minHigh'] = 20.5
-				girlBMI[11, 'maxHigh'] = 25.0
-				girlBMI[11, 'minXHigh'] = 25.0
+				girlBMI[11, 'maxLow'] = 13.75
+				girlBMI[11, 'minNormal'] = 13.75 
+				girlBMI[11, 'maxNormal'] = 21.0
+				girlBMI[11, 'minHigh'] = 21.0
+				girlBMI[11, 'maxHigh'] = 25.5
+				girlBMI[11, 'minXHigh'] = 25.5
 				girlBMI[11, 'maxXHigh'] = 1000.0
 				girlBMI[12, 'minLow'] = 0.0
 				girlBMI[12, 'maxLow'] = 14.25
 				girlBMI[12, 'minNormal'] = 14.25 
-				girlBMI[12, 'maxNormal'] = 21.5
-				girlBMI[12, 'minHigh'] = 21.5
-				girlBMI[12, 'maxHigh'] = 26.0
-				girlBMI[12, 'minXHigh'] = 26.0
+				girlBMI[12, 'maxNormal'] = 22.0
+				girlBMI[12, 'minHigh'] = 22.0
+				girlBMI[12, 'maxHigh'] = 26.75
+				girlBMI[12, 'minXHigh'] = 26.75
 				girlBMI[12, 'maxXHigh'] = 1000.0
 				girlBMI[13, 'minLow'] = 0.0
 				girlBMI[13, 'maxLow'] = 14.75
 				girlBMI[13, 'minNormal'] = 14.75 
-				girlBMI[13, 'maxNormal'] = 22.25
-				girlBMI[13, 'minHigh'] = 22.25
-				girlBMI[13, 'maxHigh'] = 27.0
-				girlBMI[13, 'minXHigh'] = 27.0
+				girlBMI[13, 'maxNormal'] = 23.0
+				girlBMI[13, 'minHigh'] = 23.0
+				girlBMI[13, 'maxHigh'] = 27.75
+				girlBMI[13, 'minXHigh'] = 27.75
 				girlBMI[13, 'maxXHigh'] = 1000.0
 				girlBMI[14, 'minLow'] = 0.0
 				girlBMI[14, 'maxLow'] = 15.25
 				girlBMI[14, 'minNormal'] = 15.25 
-				girlBMI[14, 'maxNormal'] = 23.25
-				girlBMI[14, 'minHigh'] = 23.25
-				girlBMI[14, 'maxHigh'] = 27.75
-				girlBMI[14, 'minXHigh'] = 27.75
+				girlBMI[14, 'maxNormal'] = 24.25
+				girlBMI[14, 'minHigh'] = 24.25
+				girlBMI[14, 'maxHigh'] = 28.5
+				girlBMI[14, 'minXHigh'] = 28.5
 				girlBMI[14, 'maxXHigh'] = 1000.0
 				girlBMI[15, 'minLow'] = 0.0
 				girlBMI[15, 'maxLow'] = 15.75
 				girlBMI[15, 'minNormal'] = 15.75
-				girlBMI[15, 'maxNormal'] = 24.0
-				girlBMI[15, 'minHigh'] = 24.0
-				girlBMI[15, 'maxHigh'] = 28.25
-				girlBMI[15, 'minXHigh'] = 28.25
+				girlBMI[15, 'maxNormal'] = 25.0
+				girlBMI[15, 'minHigh'] = 25.0
+				girlBMI[15, 'maxHigh'] = 29.25
+				girlBMI[15, 'minXHigh'] = 29.25
 				girlBMI[15, 'maxXHigh'] = 1000.0
 				girlBMI[16, 'minLow'] = 0.0
 				girlBMI[16, 'maxLow'] = 16.25
 				girlBMI[16, 'minNormal'] = 16.25
-				girlBMI[16, 'maxNormal'] = 25.0
-				girlBMI[16, 'minHigh'] = 25.0
-				girlBMI[16, 'maxHigh'] = 29.0
-				girlBMI[16, 'minXHigh'] = 29.0
+				girlBMI[16, 'maxNormal'] = 25.75
+				girlBMI[16, 'minHigh'] = 25.75
+				girlBMI[16, 'maxHigh'] = 29.5
+				girlBMI[16, 'minXHigh'] = 29.5
 				girlBMI[16, 'maxXHigh'] = 1000.0
 				girlBMI[17, 'minLow'] = 0.0
-				girlBMI[17, 'maxLow'] = 16.75
-				girlBMI[17, 'minNormal'] = 16.75 
-				girlBMI[17, 'maxNormal'] = 25.5
-				girlBMI[17, 'minHigh'] = 25.5
-				girlBMI[17, 'maxHigh'] = 29.5
-				girlBMI[17, 'minXHigh'] = 29.5
+				girlBMI[17, 'maxLow'] = 16.5
+				girlBMI[17, 'minNormal'] = 16.5 
+				girlBMI[17, 'maxNormal'] = 26.0
+				girlBMI[17, 'minHigh'] = 26.0
+				girlBMI[17, 'maxHigh'] = 29.75
+				girlBMI[17, 'minXHigh'] = 29.75
 				girlBMI[17, 'maxXHigh'] = 1000.0
 
 				if self.mainPage.currentBMI >= girlBMI[self.userAge, 'minLow'] and self.mainPage.currentBMI < girlBMI[self.userAge, 'maxLow']:
@@ -441,10 +445,14 @@ class resultsWindow:
 
 		return userAgeCalculate
 
+	def quitApp(self):
+		""" Close the app """
+		quitAnswer = askokcancel(title="Py Health - Quitter l'application", message="Souhaitez-vous réellement quitter l'application \"Py Health\" ?")
+		if quitAnswer == True:
+			self.mainPage.application.quit()
 
-		# CONTINUE CHILDREN CONTROL (GIRL BMI)
 
 		# TODO : Add congratulation if the BMI is normal (adult + children)
 		# TODO : Manage 0 year (too young)
 
-		# TO BE CONTINED : Link to history + Close the app
+		# TO BE CONTINED : Link to history
