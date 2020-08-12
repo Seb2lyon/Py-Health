@@ -93,7 +93,7 @@ class welcomeWindow:
 			self.entryPass.focus()
 
 		else:
-			file = open("PyHealth_User/users", "rb")
+			file = open("config/users", "rb")
 			myUnpickler = pickle.Unpickler(file)
 			appUsers = []
 

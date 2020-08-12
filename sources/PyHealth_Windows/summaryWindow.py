@@ -114,7 +114,7 @@ class summaryWindow:
 		""" Delete the account of the current user """
 		cancelAnswer = askokcancel(title="Py Health - Supprimer le compte", message="Souhaitez-vous réellement supprimer votre compte \"Py Health\" ?")
 		if cancelAnswer == True:
-			file = open("PyHealth_User/users", "rb")
+			file = open("config/users", "rb")
 			myUnpickler = pickle.Unpickler(file)
 			appUsers = []
 			newAppUsers = []
@@ -133,7 +133,7 @@ class summaryWindow:
 					newAppUsers.append(appUsers[i])
 				i = i + 1
 
-			file = open("PyHealth_User/users", "wb")
+			file = open("config/users", "wb")
 			myPickler = pickle.Pickler(file)
 			nbrUsers = len(newAppUsers)
 			i = 0

@@ -125,7 +125,7 @@ class mainWindow(Frame):
 		Summary """ 
 		self.delCreateAccountWindowOne()
 
-		file = open("PyHealth_User/users", "rb")
+		file = open("config/users", "rb")
 
 		myUnpickler = pickle.Unpickler(file)
 		appUsers = []

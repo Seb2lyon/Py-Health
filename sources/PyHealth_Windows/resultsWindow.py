@@ -131,7 +131,7 @@ class resultsWindow:
 			elif self.mainPage.currentBMI >= 40:
 				userState = "Vous êtes en état d'obésité massive"
 				stateColor = "#FF0000"
-				self.createGraphPoints(40.0, 50.0, stateColor)
+				self.createGraphPoints(40.0, 45.0, stateColor)
 
 			minNormalWeight = 18.5 * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
 			maxNormalWeight = 25 * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
@@ -294,7 +294,7 @@ class resultsWindow:
 				elif self.mainPage.currentBMI >= boyBMI[self.userAge, 'minXHigh'] and self.mainPage.currentBMI < boyBMI[self.userAge, 'maxXHigh']:
 					userState = "Vous êtes en état d'obésité"
 					stateColor = "#FF0000"
-					self.createGraphPoints(boyBMI[self.userAge, 'minXHigh'], boyBMI[self.userAge, 'maxXHigh'], stateColor)
+					self.createGraphPoints(boyBMI[self.userAge, 'minXHigh'], 34.0, stateColor)
 
 				minNormalWeight = boyBMI[self.userAge, 'minNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
 				maxNormalWeight = boyBMI[self.userAge, 'maxNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
@@ -455,7 +455,7 @@ class resultsWindow:
 				elif self.mainPage.currentBMI >= girlBMI[self.userAge, 'minXHigh'] and self.mainPage.currentBMI < girlBMI[self.userAge, 'maxXHigh']:
 					userState = "Vous êtes en état d'obésité"
 					stateColor = "#FF0000"
-					self.createGraphPoints(girlBMI[self.userAge, 'minXHigh'], girlBMI[self.userAge, 'maxXHigh'], stateColor)
+					self.createGraphPoints(girlBMI[self.userAge, 'minXHigh'], 34.0, stateColor)
 
 				minNormalWeight = girlBMI[self.userAge, 'minNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
 				maxNormalWeight = girlBMI[self.userAge, 'maxNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
@@ -476,8 +476,14 @@ class resultsWindow:
 			minCoordinate = 0
 			maxCoordinate = 60
 
+		modCurrentBMI = 0.0
+		if self.mainPage.currentBMI > maxBMI:
+			modCurrentBMI = maxBMI
+		else:
+			modCurrentBMI = self.mainPage.currentBMI
+
 		BMIDelta = maxBMI - minBMI
-		BMIDev = self.mainPage.currentBMI - minBMI
+		BMIDev = modCurrentBMI - minBMI
 
 		percentBMI = (100 * BMIDev) / BMIDelta
 
@@ -490,12 +496,17 @@ class resultsWindow:
 
 		self.mainPage.currentUser.coordinatePoints.append(coordinatePoint)
 
+		if len(self.mainPage.currentUser.coordinatePoints) > 10:
+			del self.mainPage.currentUser.userBMI[0] 
+			del self.mainPage.currentUser.lastVisits[0]
+			del self.mainPage.currentUser.coordinatePoints[0]
+
 	def quitApp(self):
 		""" Close the app """
 		quitAnswer = askokcancel(title="Py Health - Quitter l'application", message="Souhaitez-vous réellement quitter l'application \"Py Health\" ?")
 		if quitAnswer == True:
 
-			file = open("PyHealth_User/users", "rb")
+			file = open("config/users", "rb")
 			myUnplickler = pickle.Unpickler(file)
 			usersList = []
 			try:
@@ -505,7 +516,7 @@ class resultsWindow:
 				pass
 			file.close()
 
-			file = open("PyHealth_User/users", "wb")
+			file = open("config/users", "wb")
 			myPickler = pickle.Pickler(file)
 			usersNumber = len(usersList)
 			i = 0

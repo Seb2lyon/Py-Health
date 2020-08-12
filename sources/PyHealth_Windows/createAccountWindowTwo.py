@@ -26,8 +26,11 @@ class createAccountWindowTwo:
 		self.labelPseudo = Label(self.mainPage.application, text="Votre identifiant :", font=self.mainPage.largeFont)
 		self.labelPseudo['bg'] = "#E3FBFA"
 		self.labelPseudo['fg'] = "#8000FF"
-
-		self.entryPseudo = Entry(self.mainPage.application, textvariable=self.varPseudo, width=55, font=self.mainPage.normalInputFont)
+	
+		if self.mainPage.currentUser.userExist == True:
+			self.entryPseudo = Entry(self.mainPage.application, textvariable=self.varPseudo, state=DISABLED, width=55, font=self.mainPage.normalInputFont)
+		else:
+			self.entryPseudo = Entry(self.mainPage.application, textvariable=self.varPseudo, width=55, font=self.mainPage.normalInputFont)
 
 		self.labelPasswd1 = Label(self.mainPage.application, text="Votre mot de passe :", font=self.mainPage.largeFont)
 		self.labelPasswd1['bg'] = "#E3FBFA"
@@ -63,8 +66,10 @@ class createAccountWindowTwo:
 		self.buttonPrevious.place(x=57, y=404)
 		self.buttonValidate.place(x=329, y=404)
 
-		self.entryPseudo.focus()
-
+		if self.mainPage.currentUser.userExist == True:
+			self.entryPasswd1.focus()
+		else:
+			self.entryPseudo.focus()
 
 	def pressReturn(self, event):
 		""" Manage the action when user press the key Enter """
@@ -85,7 +90,7 @@ class createAccountWindowTwo:
 		self.labelWarningConnexion.destroy()
 		self.pseudoExist = False
 
-		file = open("PyHealth_User/users", "rb")
+		file = open("config/users", "rb")
 		myUnplickler = pickle.Unpickler(file)
 
 		try:
@@ -136,7 +141,7 @@ class createAccountWindowTwo:
 			self.mainPage.currentUser.userPseudo = self.varPseudo.get()
 			self.mainPage.currentUser.userPasswd = hashedPassword
 			if self.mainPage.currentUser.userExist == True:
-				file = open("PyHealth_User/users", "rb")
+				file = open("config/users", "rb")
 				myUnplickler = pickle.Unpickler(file)
 				usersList = []
 				try:
@@ -146,7 +151,7 @@ class createAccountWindowTwo:
 					pass
 				file.close()
 
-				file = open("PyHealth_User/users", "wb")
+				file = open("config/users", "wb")
 				myPickler = pickle.Pickler(file)
 				usersNumber = len(usersList)
 				i = 0
@@ -163,7 +168,7 @@ class createAccountWindowTwo:
 			
 			else:
 				self.mainPage.currentUser.userExist = True
-				file = open("PyHealth_User/users", "rb")
+				file = open("config/users", "rb")
 				myUnplickler = pickle.Unpickler(file)
 				usersList = []
 				try:
@@ -173,7 +178,7 @@ class createAccountWindowTwo:
 					pass
 				file.close()
 
-				file = open("PyHealth_User/users", "wb")
+				file = open("config/users", "wb")
 				myPickler = pickle.Pickler(file)
 				usersNumber = len(usersList)
 				i = 0
