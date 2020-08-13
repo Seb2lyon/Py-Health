@@ -23,6 +23,8 @@ class mainWindow(Frame):
 		self.application.resizable(False, False)
 		self.application['bg'] = "#E3FBFA"
 
+		self.gridNormalFont = Font(family="Arial", size=8)
+		self.gridBoldFont = Font(family="Arial", size=8, weight='bold')
 		self.smallFont = Font(family="Arial Black", size=10)
 		self.smallLinkFont = Font(family="Arial Black", size=10, underline=1)
 		self.normalFont = Font(family="Arial Black", size=11)
