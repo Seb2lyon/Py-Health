@@ -59,6 +59,7 @@ class resultsWindow:
 		self.labelShowHistory = Label(self.mainPage.application, text="Consultez votre historique", font=self.mainPage.normalLinkFont, cursor="hand2")
 		self.labelShowHistory['bg'] = "#E3FBFA"
 		self.labelShowHistory['fg'] = "#8000FF"
+		self.labelShowHistory.bind("<Button-1>", lambda e: self.showHistory())
 
 		self.buttonQuit = Button(self.mainPage.application, text="Quitter", font=self.mainPage.normalFont, width=10, command=self.quitApp)
 		self.buttonQuit['bg'] = "#969696"
@@ -501,6 +502,10 @@ class resultsWindow:
 			del self.mainPage.currentUser.lastVisits[0]
 			del self.mainPage.currentUser.coordinatePoints[0]
 
+	def showHistory(self):
+		""" Launch the History Window creation process """
+		self.mainPage.createHistoryWindow()
+
 	def quitApp(self):
 		""" Close the app """
 		quitAnswer = askokcancel(title="Py Health - Quitter l'application", message="Souhaitez-vous réellement quitter l'application \"Py Health\" ?")
@@ -534,5 +539,3 @@ class resultsWindow:
 
 		# TODO : Add congratulation if the BMI is normal (adult + children)
 		# TODO : Manage 0 year (too young)
-
-		# TO BE CONTINED : Link to history

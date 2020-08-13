@@ -15,7 +15,7 @@ class welcomeWindow:
 
 		self.mainPage.application.bind('<KeyRelease-Return>', self.pressReturn)
 
-		self.imgSubTitle = PhotoImage(file="images/Sous-titre.gif")
+		self.imgSubTitle = PhotoImage(file="images/SubTitle.gif")
 
 		self.varID = StringVar()
 		self.varPass = StringVar()

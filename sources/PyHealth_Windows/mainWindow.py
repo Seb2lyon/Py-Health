@@ -6,6 +6,7 @@ from PyHealth_Windows.createAccountWindowTwo import *
 from PyHealth_Windows.summaryWindow import *
 from PyHealth_Windows.heightAndWeightWindow import *
 from PyHealth_Windows.resultsWindow import *
+from PyHealth_Windows.historyWindow import *
 
 class mainWindow(Frame):
 	""" Main window : manager of the application
@@ -34,7 +35,7 @@ class mainWindow(Frame):
 		self.currentUser = userClass()
 		self.currentBMI = 0
 
-		self.imgBanner = PhotoImage(file="images/Titre.gif")
+		self.imgBanner = PhotoImage(file="images/Title.gif")
 		self.banner = Label(self.application, height=106, image=self.imgBanner)
 
 		self.footer = Label(self.application, text="version 1.0 | 03/08/2020 - ", font=self.smallFont)
@@ -176,6 +177,10 @@ class mainWindow(Frame):
 		the Results page """
 		self.delHeightAndWeightWindow()
 		self.results = resultsWindow(self)
+
+	def createHistoryWindow(self):
+		""" Function that permit to create the History Window """
+		self.history = historyWindow(self)
 
 	def delWelcomeWindow(self):
 		""" Destroy Welcome window """
