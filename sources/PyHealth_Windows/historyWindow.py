@@ -59,22 +59,53 @@ class historyWindow(Toplevel):
 			historyDate = datetime.date.fromtimestamp(self.mainPage.currentUser.lastVisits[i]).strftime('%d/%m/%Y')
 			self.labelDates[i]['text'] = historyDate
 			y = self.mainPage.currentUser.coordinatePoints[i] + 14
-			pointNb = self.myCanvas.create_oval(x-r, y-r, x+r, y+r, fill='black')
-			self.myCanvas.tag_bind(pointNb, '<Enter>', self.showToolTip)
-			self.myCanvas.tag_bind(pointNb, '<Leave>', self.deleteToolTip)
+			self.myCanvas.create_oval(x-r, y-r, x+r, y+r, fill='black')
+
 			x = x + 67
-			i = i + 1
+			i = i + 1	
 
 		i = 0
 		x = 15 + 33
-		r = 5
+		r = 5	
 
 		while i < self.historyCount:
 			if i > 0:
 				self.myCanvas.create_line(x - 67, self.mainPage.currentUser.coordinatePoints[i-1] + 14, x, self.mainPage.currentUser.coordinatePoints[i] + 14, width=2)
+
 			x = x + 67
-			i = i + 1
-		
+			i = i + 1	
+
+		if self.historyCount > 0:
+			self.myCanvas.tag_bind(2, '<Enter>', lambda e: self.showToolTip(0))
+			self.myCanvas.tag_bind(2, '<Leave>', self.deleteToolTip)
+		if self.historyCount > 1:
+			self.myCanvas.tag_bind(3, '<Enter>', lambda e: self.showToolTip(1))
+			self.myCanvas.tag_bind(3, '<Leave>', self.deleteToolTip)
+		if self.historyCount > 2:
+			self.myCanvas.tag_bind(4, '<Enter>', lambda e: self.showToolTip(2))
+			self.myCanvas.tag_bind(4, '<Leave>', self.deleteToolTip)
+		if self.historyCount > 3:
+			self.myCanvas.tag_bind(5, '<Enter>', lambda e: self.showToolTip(3))
+			self.myCanvas.tag_bind(5, '<Leave>', self.deleteToolTip)
+		if self.historyCount > 4:
+			self.myCanvas.tag_bind(6, '<Enter>', lambda e: self.showToolTip(4))
+			self.myCanvas.tag_bind(6, '<Leave>', self.deleteToolTip)
+		if self.historyCount > 5:
+			self.myCanvas.tag_bind(7, '<Enter>', lambda e: self.showToolTip(5))
+			self.myCanvas.tag_bind(7, '<Leave>', self.deleteToolTip)
+		if self.historyCount > 6:
+			self.myCanvas.tag_bind(8, '<Enter>', lambda e: self.showToolTip(6))
+			self.myCanvas.tag_bind(8, '<Leave>', self.deleteToolTip)
+		if self.historyCount > 7:
+			self.myCanvas.tag_bind(9, '<Enter>', lambda e: self.showToolTip(7))
+			self.myCanvas.tag_bind(9, '<Leave>', self.deleteToolTip)
+		if self.historyCount > 8:
+			self.myCanvas.tag_bind(10, '<Enter>', lambda e: self.showToolTip(8))
+			self.myCanvas.tag_bind(10, '<Leave>', self.deleteToolTip)
+		if self.historyCount > 9:
+			self.myCanvas.tag_bind(11, '<Enter>', lambda e: self.showToolTip(9))
+			self.myCanvas.tag_bind(11, '<Leave>', self.deleteToolTip)			
+	
 		self.myCanvas.create_image(15, 288, anchor=NW, image=self.imageRedLabel)
 		self.myCanvas.create_image(15, 312, anchor=NW, image=self.imageOrangeLabel)
 		self.myCanvas.create_image(15, 336, anchor=NW, image=self.imageGreenLabel)
@@ -102,11 +133,13 @@ class historyWindow(Toplevel):
 		self.labelDate10.place(x=618, y=255)
 		self.buttonClose.place(x=550, y=330)
 
-	def showToolTip(self, event):
+	def showToolTip(self, rangeBMI):
 		""" Show Tooltip with the BMI """
-		self.labelToolTip = Label(self, bg='white', text="To be continued", font=self.mainPage.gridNormalFont)
-		self.labelToolTip.place(x=100, y=100)
-
+		self.labelToolTip = Label(self, bg='white', text=round(self.mainPage.currentUser.userBMI[rangeBMI], 2), font=self.mainPage.gridNormalFont)
+		xToolTip = 48 + (67 * rangeBMI)
+		yToolTip = self.mainPage.currentUser.coordinatePoints[rangeBMI] + 35
+		self.labelToolTip.place(x=xToolTip, y=yToolTip)
+		
 	def deleteToolTip(self, event):
 		""" Delete the tooltip """
 		self.labelToolTip.destroy()
@@ -114,5 +147,3 @@ class historyWindow(Toplevel):
 	def closeWindow(self):
 		""" Close the History Window """
 		self.destroy()
-
-		# TODO : Tooltip on every point (display BMI) - ID 1st point = 2
