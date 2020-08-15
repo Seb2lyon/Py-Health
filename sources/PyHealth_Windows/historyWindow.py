@@ -1,4 +1,5 @@
 from tkinter import *
+import datetime
 
 class historyWindow(Toplevel):
 	""" Pop-up window that display the history of the user BMI :
@@ -49,6 +50,21 @@ class historyWindow(Toplevel):
 		self.labelDate10 = Label(self, bg='#E3FBFA', height=1, width=10, font=self.mainPage.gridNormalFont)	
 		self.labelDates.append(self.labelDate10)
 
+		self.historyCount = len(self.mainPage.currentUser.lastVisits)
+		i = 0
+		x = 15 + 33
+		r = 5
+
+		while i < self.historyCount:
+			historyDate = datetime.date.fromtimestamp(self.mainPage.currentUser.lastVisits[i]).strftime('%d/%m/%Y')
+			self.labelDates[i]['text'] = historyDate
+			y = self.mainPage.currentUser.coordinatePoints[i] + 14
+			self.myCanvas.create_oval(x-r, y-r, x+r, y+r, fill='black')
+			if i > 0:
+				self.myCanvas.create_line(x - 67, self.mainPage.currentUser.coordinatePoints[i-1] + 14, x, self.mainPage.currentUser.coordinatePoints[i] + 14, width=2)
+			x = x + 67
+			i = i + 1
+
 		self.myCanvas.create_image(15, 288, anchor=NW, image=self.imageRedLabel)
 		self.myCanvas.create_image(15, 312, anchor=NW, image=self.imageOrangeLabel)
 		self.myCanvas.create_image(15, 336, anchor=NW, image=self.imageGreenLabel)
@@ -80,4 +96,4 @@ class historyWindow(Toplevel):
 		""" Close the History Window """
 		self.destroy()
 
-		# INFO : Point size = 10
+		# TODO : Tooltip on every point (display BMI)

@@ -6,6 +6,8 @@ You can create an account (saved only on your local computer) in order to check 
 
 This app is able to calculate the BMI of every people aged from 1 year old.
 
-I'm still on the way of developping it... so don't hesitate to give me advices or help me to improve the scripts.
+Only the standard library is used, so no need to install other dependencies.
+
+I'm still on the way of developping it... don't hesitate to give me advices or help me to improve the scripts.
 
 Be safe :-)

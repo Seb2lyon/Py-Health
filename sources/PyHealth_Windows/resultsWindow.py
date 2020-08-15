@@ -40,7 +40,7 @@ class resultsWindow:
 		self.labelNormalWeight1['bg'] = "#E3FBFA"
 		self.labelNormalWeight1['fg'] = "#000000"
 
-		self.labelNormalWeight2 = Label(self.mainPage.application, text=round(showMinNormalWeight, 1), font=self.mainPage.largeFont)
+		self.labelNormalWeight2 = Label(self.mainPage.application, height=1, width=5, text=round(showMinNormalWeight, 1), font=self.mainPage.largeFont)
 		self.labelNormalWeight2['bg'] = "#E3FBFA"
 		self.labelNormalWeight2['fg'] = "#3366FF"
 
@@ -48,7 +48,7 @@ class resultsWindow:
 		self.labelNormalWeight3['bg'] = "#E3FBFA"
 		self.labelNormalWeight3['fg'] = "#000000"
 
-		self.labelNormalWeight4 = Label(self.mainPage.application, text=round(showMaxNormalWeight, 1), font=self.mainPage.largeFont)
+		self.labelNormalWeight4 = Label(self.mainPage.application, height=1, width=5, text=round(showMaxNormalWeight, 1), font=self.mainPage.largeFont)
 		self.labelNormalWeight4['bg'] = "#E3FBFA"
 		self.labelNormalWeight4['fg'] = "#3366FF"
 
@@ -71,9 +71,9 @@ class resultsWindow:
 		self.labelResult.place(x=startPoint1, y=185)
 		self.labelNormalWeight1.place(x=35, y=246)
 		self.labelNormalWeight2.place(x=35, y=276)
-		self.labelNormalWeight3.place(x=95, y=276)
+		self.labelNormalWeight3.place(x=98, y=276)
 		self.labelNormalWeight4.place(x=125, y=276)
-		self.labelNormalWeight5.place(x=185, y=276)
+		self.labelNormalWeight5.place(x=188, y=276)
 		self.labelShowHistory.place(x=136, y=330)
 		self.buttonQuit.place(x=190, y=380)
 
@@ -108,34 +108,34 @@ class resultsWindow:
 			if self.mainPage.currentBMI < 16.5:
 				userState = "Vous êtes en état de dénutrition"
 				stateColor = "#0000FF"
-				self.createGraphPoints(0.0, 16.5, stateColor)
+				self.createGraphPoints(0.0, 18.49, stateColor)
 			elif self.mainPage.currentBMI >= 16.5 and self.mainPage.currentBMI < 18.5:
 				userState = "Vous êtes en état de maigreur"
 				stateColor = "#0000FF"
-				self.createGraphPoints(16.5, 18.5, stateColor)
+				self.createGraphPoints(0.0, 18.49, stateColor)
 			elif self.mainPage.currentBMI >= 18.5 and self.mainPage.currentBMI < 25:
 				userState = "Vous avez une corpulence normale"
 				stateColor = "#01CA02"
-				self.createGraphPoints(18.5, 25.0, stateColor)
+				self.createGraphPoints(18.5, 24.99, stateColor)
 			elif self.mainPage.currentBMI >= 25 and self.mainPage.currentBMI < 30:
 				userState = "Vous êtes en surpoids"
 				stateColor = "#FF6600"
-				self.createGraphPoints(25.0, 30.0, stateColor)
+				self.createGraphPoints(25.0, 29.99, stateColor)
 			elif self.mainPage.currentBMI >= 30 and self.mainPage.currentBMI < 35:
 				userState = "Vous êtes en état d'obésité modérée"
 				stateColor = "#FF0000"
-				self.createGraphPoints(30.0, 35.0, stateColor)
+				self.createGraphPoints(30.0, 45.0, stateColor)
 			elif self.mainPage.currentBMI >= 35 and self.mainPage.currentBMI < 40:
 				userState = "Vous êtes en état d'obésité sévère"
 				stateColor = "#FF0000"
-				self.createGraphPoints(35.0, 40.0, stateColor)
+				self.createGraphPoints(30.0, 45.0, stateColor)
 			elif self.mainPage.currentBMI >= 40:
 				userState = "Vous êtes en état d'obésité massive"
 				stateColor = "#FF0000"
-				self.createGraphPoints(40.0, 45.0, stateColor)
+				self.createGraphPoints(30.0, 45.0, stateColor)
 
 			minNormalWeight = 18.5 * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
-			maxNormalWeight = 25 * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
+			maxNormalWeight = 24.99 * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
 			return userState, stateColor, minNormalWeight, maxNormalWeight
 
 		else:
@@ -283,22 +283,22 @@ class resultsWindow:
 				if self.mainPage.currentBMI >= boyBMI[self.userAge, 'minLow'] and self.mainPage.currentBMI < boyBMI[self.userAge, 'maxLow']:
 					userState = "Vous êtes en insuffisance pondérale"
 					stateColor = "#0000FF"
-					self.createGraphPoints(boyBMI[self.userAge, 'minLow'], boyBMI[self.userAge, 'maxLow'], stateColor)
+					self.createGraphPoints(boyBMI[self.userAge, 'minLow']-0.9999999, boyBMI[self.userAge, 'maxLow'], stateColor)
 				elif self.mainPage.currentBMI >= boyBMI[self.userAge, 'minNormal'] and self.mainPage.currentBMI < boyBMI[self.userAge, 'maxNormal']:
 					userState = "Vous avez une corpulence normale"
 					stateColor = "#01CA02"
-					self.createGraphPoints(boyBMI[self.userAge, 'minNormal'], boyBMI[self.userAge, 'maxNormal'], stateColor)
+					self.createGraphPoints(boyBMI[self.userAge, 'minNormal']-0.9999999, boyBMI[self.userAge, 'maxNormal'], stateColor)
 				elif self.mainPage.currentBMI >= boyBMI[self.userAge, 'minHigh'] and self.mainPage.currentBMI < boyBMI[self.userAge, 'maxHigh']:
 					userState = "Vous êtes en surpoids"
 					stateColor = "#FF6600"
-					self.createGraphPoints(boyBMI[self.userAge, 'minHigh'], boyBMI[self.userAge, 'maxHigh'], stateColor)
+					self.createGraphPoints(boyBMI[self.userAge, 'minHigh']-0.9999999, boyBMI[self.userAge, 'maxHigh'], stateColor)
 				elif self.mainPage.currentBMI >= boyBMI[self.userAge, 'minXHigh'] and self.mainPage.currentBMI < boyBMI[self.userAge, 'maxXHigh']:
 					userState = "Vous êtes en état d'obésité"
 					stateColor = "#FF0000"
 					self.createGraphPoints(boyBMI[self.userAge, 'minXHigh'], 34.0, stateColor)
 
 				minNormalWeight = boyBMI[self.userAge, 'minNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
-				maxNormalWeight = boyBMI[self.userAge, 'maxNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
+				maxNormalWeight = boyBMI[self.userAge, 'maxNormal']-0.9999999 * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
 				return userState, stateColor, minNormalWeight, maxNormalWeight
 
 			else:
@@ -444,22 +444,22 @@ class resultsWindow:
 				if self.mainPage.currentBMI >= girlBMI[self.userAge, 'minLow'] and self.mainPage.currentBMI < girlBMI[self.userAge, 'maxLow']:
 					userState = "Vous êtes en insuffisance pondérale"
 					stateColor = "#0000FF"
-					self.createGraphPoints(girlBMI[self.userAge, 'minLow'], girlBMI[self.userAge, 'maxLow'], stateColor)
+					self.createGraphPoints(girlBMI[self.userAge, 'minLow']-0.9999999, girlBMI[self.userAge, 'maxLow'], stateColor)
 				elif self.mainPage.currentBMI >= girlBMI[self.userAge, 'minNormal'] and self.mainPage.currentBMI < girlBMI[self.userAge, 'maxNormal']:
 					userState = "Vous avez une corpulence normale"
 					stateColor = "#01CA02"
-					self.createGraphPoints(girlBMI[self.userAge, 'minNormal'], girlBMI[self.userAge, 'maxNormal'], stateColor)
+					self.createGraphPoints(girlBMI[self.userAge, 'minNormal']-0.9999999, girlBMI[self.userAge, 'maxNormal'], stateColor)
 				elif self.mainPage.currentBMI >= girlBMI[self.userAge, 'minHigh'] and self.mainPage.currentBMI < girlBMI[self.userAge, 'maxHigh']:
 					userState = "Vous êtes en surpoids"
 					stateColor = "#FF6600"
-					self.createGraphPoints(girlBMI[self.userAge, 'minHigh'], girlBMI[self.userAge, 'maxHigh'], stateColor)
+					self.createGraphPoints(girlBMI[self.userAge, 'minHigh']-0.9999999, girlBMI[self.userAge, 'maxHigh'], stateColor)
 				elif self.mainPage.currentBMI >= girlBMI[self.userAge, 'minXHigh'] and self.mainPage.currentBMI < girlBMI[self.userAge, 'maxXHigh']:
 					userState = "Vous êtes en état d'obésité"
 					stateColor = "#FF0000"
 					self.createGraphPoints(girlBMI[self.userAge, 'minXHigh'], 34.0, stateColor)
 
 				minNormalWeight = girlBMI[self.userAge, 'minNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
-				maxNormalWeight = girlBMI[self.userAge, 'maxNormal'] * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
+				maxNormalWeight = girlBMI[self.userAge, 'maxNormal']-0.9999999 * (self.mainPage.currentUser.userHeight / 100) * (self.mainPage.currentUser.userHeight / 100)
 				return userState, stateColor, minNormalWeight, maxNormalWeight
 
 	def createGraphPoints(self, minBMI, maxBMI, colorStatus):
@@ -537,5 +537,4 @@ class resultsWindow:
 			self.mainPage.application.quit()
 
 
-		# TODO : Add congratulation if the BMI is normal (adult + children)
 		# TODO : Manage 0 year (too young)
