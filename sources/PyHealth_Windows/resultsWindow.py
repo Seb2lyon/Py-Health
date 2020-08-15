@@ -20,46 +20,98 @@ class resultsWindow:
 
 		self.userAge = self.userAgeControl()
 
-		self.labelBMI1 = Label(self.mainPage.application, text="Votre IMC est de :", font=self.mainPage.largeFont)
-		self.labelBMI1['bg'] = "#E3FBFA"
-		self.labelBMI1['fg'] = "#000000"
+		if self.userAge < 1:
+			self.labelBMI1 = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
+			self.labelBMI1['bg'] = "#E3FBFA"
+			self.labelBMI1['fg'] = "#E3FBFA"
 
-		self.labelBMI2 = Label(self.mainPage.application, text=round(self.mainPage.currentBMI, 2), font=self.mainPage.largeFont)
-		self.labelBMI2['bg'] = "#E3FBFA"
-		self.labelBMI2['fg'] = "#8000FF"
+			self.labelBMI2 = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
+			self.labelBMI2['bg'] = "#E3FBFA"
+			self.labelBMI2['fg'] = "#E3FBFA"
 
-		showUserState, showStateColor, showMinNormalWeight, showMaxNormalWeight = self.userStateControl()
-		stateSize = len(showUserState) * 12
-		startPoint1 = 255 - (stateSize / 2)
+			self.labelResult = Label(self.mainPage.application, text="Votre IMC n'a pas pu être calculé", font=self.mainPage.xlargeFont)
+			self.labelResult['bg'] = "#E3FBFA"
+			self.labelResult['fg'] = "#8000FF"
 
-		self.labelResult = Label(self.mainPage.application, text=showUserState, font=self.mainPage.xlargeFont)
-		self.labelResult['bg'] = "#E3FBFA"
-		self.labelResult['fg'] = showStateColor
+			stateSize = 33 * 12
+			startPoint1 = 255 - (stateSize / 2)
 
-		self.labelNormalWeight1 = Label(self.mainPage.application, text="Votre poids idéal est compris entre", font=self.mainPage.largeFont)
-		self.labelNormalWeight1['bg'] = "#E3FBFA"
-		self.labelNormalWeight1['fg'] = "#000000"
+			if self.mainPage.currentUser.userGender == "H":
+				self.labelNormalWeight1 = Label(self.mainPage.application, text="Vous devez être âgé d'au moins 1 an !", font=self.mainPage.largeUnderlineFont)
+			else:
+				self.labelNormalWeight1 = Label(self.mainPage.application, text="Vous devez être âgée d'au moins 1 an !", font=self.mainPage.largeUnderlineFont)
+			self.labelNormalWeight1['bg'] = "#E3FBFA"
+			self.labelNormalWeight1['fg'] = "#000000"
 
-		self.labelNormalWeight2 = Label(self.mainPage.application, height=1, width=5, text=round(showMinNormalWeight, 1), font=self.mainPage.largeFont)
-		self.labelNormalWeight2['bg'] = "#E3FBFA"
-		self.labelNormalWeight2['fg'] = "#3366FF"
+			self.labelNormalWeight2 = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
+			self.labelNormalWeight2['bg'] = "#E3FBFA"
+			self.labelNormalWeight2['fg'] = "#E3FBFA"
 
-		self.labelNormalWeight3 = Label(self.mainPage.application, text="et", font=self.mainPage.largeFont)
-		self.labelNormalWeight3['bg'] = "#E3FBFA"
-		self.labelNormalWeight3['fg'] = "#000000"
+			self.labelNormalWeight3 = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
+			self.labelNormalWeight3['bg'] = "#E3FBFA"
+			self.labelNormalWeight3['fg'] = "#E3FBFA"
 
-		self.labelNormalWeight4 = Label(self.mainPage.application, height=1, width=5, text=round(showMaxNormalWeight, 1), font=self.mainPage.largeFont)
-		self.labelNormalWeight4['bg'] = "#E3FBFA"
-		self.labelNormalWeight4['fg'] = "#3366FF"
+			self.labelNormalWeight4 = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
+			self.labelNormalWeight4['bg'] = "#E3FBFA"
+			self.labelNormalWeight4['fg'] = "#E3FBFA"
 
-		self.labelNormalWeight5 = Label(self.mainPage.application, text="kilogrammes.", font=self.mainPage.largeFont)
-		self.labelNormalWeight5['bg'] = "#E3FBFA"
-		self.labelNormalWeight5['fg'] = "#000000"
+			self.labelNormalWeight5 = Label(self.mainPage.application, text="", font=self.mainPage.largeFont)
+			self.labelNormalWeight5['bg'] = "#E3FBFA"
+			self.labelNormalWeight5['fg'] = "#E3FBFA"
 
-		self.labelShowHistory = Label(self.mainPage.application, text="Consultez votre historique", font=self.mainPage.normalLinkFont, cursor="hand2")
-		self.labelShowHistory['bg'] = "#E3FBFA"
-		self.labelShowHistory['fg'] = "#8000FF"
-		self.labelShowHistory.bind("<Button-1>", lambda e: self.showHistory())
+			self.labelShowHistory = Label(self.mainPage.application, text="Merci de revenir plus tard", font=self.mainPage.normalItalicFont)
+			self.labelShowHistory['bg'] = "#E3FBFA"
+			self.labelShowHistory['fg'] = "#3366FF"
+
+			del self.mainPage.currentUser.userBMI
+			del self.mainPage.currentUser.lastVisits
+			del self.mainPage.currentUser.coordinatePoints
+
+			self.mainPage.currentUser.userBMI = []
+			self.mainPage.currentUser.lastVisits = []
+			self.mainPage.currentUser.coordinatePoints = []
+
+		else:
+			self.labelBMI1 = Label(self.mainPage.application, text="Votre IMC est de :", font=self.mainPage.largeFont)
+			self.labelBMI1['bg'] = "#E3FBFA"
+			self.labelBMI1['fg'] = "#000000"
+
+			self.labelBMI2 = Label(self.mainPage.application, text=round(self.mainPage.currentBMI, 2), font=self.mainPage.largeFont)
+			self.labelBMI2['bg'] = "#E3FBFA"
+			self.labelBMI2['fg'] = "#8000FF"
+
+			showUserState, showStateColor, showMinNormalWeight, showMaxNormalWeight = self.userStateControl()
+			stateSize = len(showUserState) * 12
+			startPoint1 = 255 - (stateSize / 2)
+
+			self.labelResult = Label(self.mainPage.application, text=showUserState, font=self.mainPage.xlargeFont)
+			self.labelResult['bg'] = "#E3FBFA"
+			self.labelResult['fg'] = showStateColor
+
+			self.labelNormalWeight1 = Label(self.mainPage.application, text="Votre poids idéal est compris entre", font=self.mainPage.largeFont)
+			self.labelNormalWeight1['bg'] = "#E3FBFA"
+			self.labelNormalWeight1['fg'] = "#000000"
+
+			self.labelNormalWeight2 = Label(self.mainPage.application, height=1, width=5, text=round(showMinNormalWeight, 1), font=self.mainPage.largeFont)
+			self.labelNormalWeight2['bg'] = "#E3FBFA"
+			self.labelNormalWeight2['fg'] = "#3366FF"
+
+			self.labelNormalWeight3 = Label(self.mainPage.application, text="et", font=self.mainPage.largeFont)
+			self.labelNormalWeight3['bg'] = "#E3FBFA"
+			self.labelNormalWeight3['fg'] = "#000000"
+
+			self.labelNormalWeight4 = Label(self.mainPage.application, height=1, width=5, text=round(showMaxNormalWeight, 1), font=self.mainPage.largeFont)
+			self.labelNormalWeight4['bg'] = "#E3FBFA"
+			self.labelNormalWeight4['fg'] = "#3366FF"
+
+			self.labelNormalWeight5 = Label(self.mainPage.application, text="kilogrammes.", font=self.mainPage.largeFont)
+			self.labelNormalWeight5['bg'] = "#E3FBFA"
+			self.labelNormalWeight5['fg'] = "#000000"
+
+			self.labelShowHistory = Label(self.mainPage.application, text="Consultez votre historique", font=self.mainPage.normalLinkFont, cursor="hand2")
+			self.labelShowHistory['bg'] = "#E3FBFA"
+			self.labelShowHistory['fg'] = "#8000FF"
+			self.labelShowHistory.bind("<Button-1>", lambda e: self.showHistory())
 
 		self.buttonQuit = Button(self.mainPage.application, text="Quitter", font=self.mainPage.normalFont, width=10, command=self.quitApp)
 		self.buttonQuit['bg'] = "#969696"
@@ -535,6 +587,3 @@ class resultsWindow:
 			file.close()
 	
 			self.mainPage.application.quit()
-
-
-		# TODO : Manage 0 year (too young)
