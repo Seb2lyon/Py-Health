@@ -24,7 +24,7 @@ class historyWindow(Toplevel):
 		self.imageRedLabel = PhotoImage(file="images/RedLabel.gif")
 		self.imageOrangeLabel = PhotoImage(file="images/OrangeLabel.gif")
 
-		self.myCanvas = Canvas(self, bg='#E3FBFA', height=400, width=700)
+		self.myCanvas = Canvas(self, bg='#E3FBFA', height=400, width=700, closeenough=0)
 		self.myCanvas.create_image(15, 15, anchor=NW, image=self.imageGrid)
 
 		self.labelDates = []
@@ -59,12 +59,22 @@ class historyWindow(Toplevel):
 			historyDate = datetime.date.fromtimestamp(self.mainPage.currentUser.lastVisits[i]).strftime('%d/%m/%Y')
 			self.labelDates[i]['text'] = historyDate
 			y = self.mainPage.currentUser.coordinatePoints[i] + 14
-			self.myCanvas.create_oval(x-r, y-r, x+r, y+r, fill='black')
+			pointNb = self.myCanvas.create_oval(x-r, y-r, x+r, y+r, fill='black')
+			self.myCanvas.tag_bind(pointNb, '<Enter>', self.showToolTip)
+			self.myCanvas.tag_bind(pointNb, '<Leave>', self.deleteToolTip)
+			x = x + 67
+			i = i + 1
+
+		i = 0
+		x = 15 + 33
+		r = 5
+
+		while i < self.historyCount:
 			if i > 0:
 				self.myCanvas.create_line(x - 67, self.mainPage.currentUser.coordinatePoints[i-1] + 14, x, self.mainPage.currentUser.coordinatePoints[i] + 14, width=2)
 			x = x + 67
 			i = i + 1
-
+		
 		self.myCanvas.create_image(15, 288, anchor=NW, image=self.imageRedLabel)
 		self.myCanvas.create_image(15, 312, anchor=NW, image=self.imageOrangeLabel)
 		self.myCanvas.create_image(15, 336, anchor=NW, image=self.imageGreenLabel)
@@ -92,8 +102,17 @@ class historyWindow(Toplevel):
 		self.labelDate10.place(x=618, y=255)
 		self.buttonClose.place(x=550, y=330)
 
+	def showToolTip(self, event):
+		""" Show Tooltip with the BMI """
+		self.labelToolTip = Label(self, bg='white', text="To be continued", font=self.mainPage.gridNormalFont)
+		self.labelToolTip.place(x=100, y=100)
+
+	def deleteToolTip(self, event):
+		""" Delete the tooltip """
+		self.labelToolTip.destroy()
+
 	def closeWindow(self):
 		""" Close the History Window """
 		self.destroy()
 
-		# TODO : Tooltip on every point (display BMI)
+		# TODO : Tooltip on every point (display BMI) - ID 1st point = 2
