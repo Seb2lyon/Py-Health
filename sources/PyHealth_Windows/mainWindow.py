@@ -41,7 +41,7 @@ class mainWindow(Frame):
 		self.imgBanner = PhotoImage(file="images/Title.gif")
 		self.banner = Label(self.application, height=106, image=self.imgBanner)
 
-		self.footer = Label(self.application, text="version 1.0 | 03/08/2020 - ", font=self.smallFont)
+		self.footer = Label(self.application, text="version 1.0 | 01/10/2020 - ", font=self.smallFont)
 		self.footer['bg'] = "#E3FBFA"
 		self.footer['fg'] = "#3366FF"
 

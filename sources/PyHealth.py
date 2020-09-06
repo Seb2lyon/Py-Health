@@ -1,7 +1,9 @@
 ######################################
-#                                    #
-# Created and developped bu Seb2lyon #
-#      08-03-2020 to XX-XX-XXXX      #
+#             Py Health              #
+#               v 1.0                #
+#              --------              #
+# Created and developped by Seb2lyon #
+#      08-03-2020 to 10-01-2020      #
 #              --------              #
 #         Enjoy and Be safe!         #
 #                                    #
